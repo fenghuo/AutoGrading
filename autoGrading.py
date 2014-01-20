@@ -67,7 +67,7 @@ class TestCase:
 		if(lineCounter==lineExpect):
 			return 0
 		else:
-			self.errorMsg="Scanner Error\n"
+			self.errorMsg="Scanner Error! Expect Error Line: "+lineExpect+" ,your error line: "+lineCounter+"\n"
 			return 1
 
 
@@ -147,6 +147,7 @@ class Student:
 	def grade(self,test):
 		print "grading:"
 		self.result=test.runTest(command,log,error)
+
 	def email(self):
 		fp = open(textfile, 'rb')
 		# Create a text/plain message
@@ -240,8 +241,27 @@ class Grading:
 		for student in self.students:
 			student.grade(["./calc"],self.log,self.error)
 			print student.name+" "+student.score
+def main():
+	os.chdir(sys.path[0])
+
+	parser = OptionParser()
+	parser.add_option('--grade')
+	options, args = parser.parse_args()
+
+	if options.grade:
+		print "grading:"
+
+	else:
+		print "No Options!"
+
+
+
 
 
 proj0=Grading()
 proj0.genTestCase()
 proj0.startGrading()
+
+
+if __name__ == '__main__':
+    sys.exit(main())
