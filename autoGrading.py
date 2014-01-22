@@ -156,16 +156,16 @@ class TestP0Code(TestCase):
 		tcoutput=open(testID+".c.output","wr")
 		result=0
 		result=subprocess.call(["gcc","-lm",testID+'.c',"-o",testID],stdout=log,stderr=error)
-		if(result==0):
-			result=subprocess.call(["./"+testID],stdout=tcoutput,stderr=error)
-			if(result==0):
-				result=subprocess.call(["diff","-bBi",self.testResult,testID+".c.output"],stdout=log,stderr=error)
-				if(result!=0):
-					self.result.errorMsg="C code execution output error\n"
-			else:
-				self.result.errorMsg="C code runtime error\n"
-		else:
-			self.result.errorMsg="C code Compile error\n"
+		if(result!=0):
+			self.result.errorMsg+="C code Compile error\n"
+		
+		result=subprocess.call(["./"+testID],stdout=tcoutput,stderr=error)
+		if(result!=0):
+			self.result.errorMsg+="C code runtime error\n"
+
+		result=subprocess.call(["diff","-bBi",self.testResult,testID+".c.output"],stdout=log,stderr=error)
+		if(result!=0):
+			self.result.errorMsg+="C code execution output error\n"
 				
 		tcoutput.close()
 		self.result.result=result
