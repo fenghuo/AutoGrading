@@ -1,0 +1,13 @@
+17:15:31 01/23/14 PST
+command: make clean
+rm -f calc calc.o calc_def y.tab.o y.tab.c y.tab.h lex.yy.o lex.yy.c y.output
+rm -f test.good.defoutput test.bad.defoutput test.good.dot test.bad.dot test.good.ps test.good.pdf
+17:15:31 01/23/14 PST
+command: make
+bison -d -rsolved -y  calc_def.y
+gcc -c y.tab.c
+flex calc_def.l
+gcc -c lex.yy.c
+gcc lex.yy.o y.tab.o -o calc_def
+g++ -c calc.cpp
+g++ calc.o -o calc
