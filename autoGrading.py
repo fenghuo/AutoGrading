@@ -35,6 +35,18 @@ class TestCase:
 	def load():
 		print "loading test case: "+testID	
 		
+	def gen(self,command):
+		self.errorMsg=""
+		testID=self.testID
+		tin=open(self.testIn,"r")
+		tout=open(testID+".output","wr")
+		tcode=open(testID+".c","wr")
+		subprocess.call(command,stdin=tin,stdout=tout,stderr=tcode)
+		tin.close()
+		tout.close()
+		tcode.close()
+
+
 	def run(self,command,log,error):
 		self.errorMsg=""
 		testID=self.testID
@@ -46,65 +58,19 @@ class TestCase:
 		tout.close()
 		tcode.close()
 
-	def testScan(self,log,error):
+class TestP0Scan(TestCase):
+	def gen(self,command):
+		TestCase.gen(self,command)
+		
 		tout=open(self.testID+".output","r").readlines()
-		tresult=open(self.testResult,"r").readlines()
-		lineCounter=None
-		lineExpect=''.join(tresult)
+		errorLine=""
+
 		for line in reversed(tout):
 			if(line.find("scan error")>=0):
-				lineCounter=line[line.find('line')+4:]				
+				errorLine=line[line.find('line')+4:].strip()
 				break
-		if(lineCounter==lineExpect):
-			self.result.result=0
-		else:
-			self.result.errorMsg="Scanner Error! Expect Error Line: "+lineExpect+" ,your error line: "+lineCounter+"\n"
-			self.result.result=1;
-		return self.result
+		return errorLine
 
-
-	def testParse(self,log,error):
-                tout=open(self.testID+".output","r")
-		result=[]
-		for line in tout:
-			if(line.find('fillcolor=powderblue')>=0):
-				for c in line:
-					if(c>='0' and c<='9'):
-						break;
-					elif(c=='"' or c=='\t' or c==' '):
-						continue
-					else:
-						result.append(c)
-			
-		tresult=open(self.testResult,"r").readlines()
-		result=''.join(result).strip()	
-		tresult=''.join(tresult).strip()
-		if(result==tresult):
-			return 0
-		else:
-			self.errorMsg="Parse Tree Error\n"	
-			return 1
-				
-	def testCode(self,log,error):
-		testID=self.testID
-		tcoutput=open(testID+".c.output","wr")
-		result=0
-		result=subprocess.call(["gcc","-lm",testID+'.c',"-o",testID],stdout=log,stderr=error)
-		if(result==0):
-			result=subprocess.call(["./"+testID],stdout=tcoutput,stderr=error)
-			if(result==0):
-				result=subprocess.call(["diff","-bBi",self.testResult,testID+".c.output"],stdout=log,stderr=error)
-				if(result!=0):
-					self.errorMsg="C code execution output error\n"
-			else:
-				self.errorMsg="C code runtime error\n"
-		else:
-			self.errorMsg="C code Compile error\n"
-				
-		tcoutput.close()
-		return result
-
-class TestP0Scan(TestCase):
 	def run(self,command,log,error):
 
 		TestCase.run(self,command,log,error)
@@ -121,15 +87,53 @@ class TestP0Scan(TestCase):
 		if(lineCounter==lineExpect):
 			self.result.result=0
 		else:
-			self.result.errorMsg="Scanner Error! Expect Error Line: "+str(lineExpect)+" ,your error line: "+str(lineCounter)+"\n"
+			self.result.errorMsg+="Scanner Error! Expect Error Line: "+str(lineExpect)+" ,your error line: "+str(lineCounter)+"\n"
 			self.result.result=1
 		return self.result
 
 class TestP0Parse(TestCase):
-	def run(self,command,log,error):
+	def gen(self,command):
+		
+		TestCase.gen(self,command)
+
                 tout=open(self.testID+".output","r")
 		result=[]
+		errorLine=None
 		for line in tout:
+			if(line.find("scan error")>=0):
+				print "Find scan error!----------"
+				return
+			if(line.find("syntax error")>=0):
+				errorLine=line[line.find('line')+4:].strip()
+				break;
+
+			if(line.find('fillcolor=powderblue')>=0):
+				for c in line:
+					if(c>='0' and c<='9'):
+						break;
+					elif(c=='"' or c=='\t' or c==' '):
+						continue
+					else:
+						result.append(c)
+			
+		result=''.join(result).strip()	
+		if(errorLine!=None):
+			result=errorLine
+		return result
+
+
+	def run(self,command,log,error):
+
+		TestCase.run(self,command,log,error)
+
+                tout=open(self.testID+".output","r")
+		result=[]
+		errorLine=None
+		for line in tout:
+			if(line.find("syntax error")>=0):
+				errorLine=line[line.find('line')+4:].strip()
+				break;
+
 			if(line.find('fillcolor=powderblue')>=0):
 				for c in line:
 					if(c>='0' and c<='9'):
@@ -142,15 +146,38 @@ class TestP0Parse(TestCase):
 		tresult=open(self.testResult,"r").readlines()
 		result=''.join(result).strip()	
 		tresult=''.join(tresult).strip()
+		if(errorLine!=None):
+			result=errorLine
 		if(result==tresult):
 			self.result.result=0
 		else:
-			self.result.errorMsg="Parse Tree Error\n"	
+			self.result.errorMsg+="Parse Tree Error\n"	
 			self.result.result=1
 		return self.result
 
 class TestP0Code(TestCase):
+	def gen(self,command):
+		TestCase.gen(self,command)
+
+		testID=self.testID
+		tcoutput=open(testID+".c.output","wr")
+		result=0
+		result=subprocess.call(["gcc","-lm",testID+'.c',"-o",testID])
+		if(result!=0):
+			print "C code Compile error\n"
+		
+		result=subprocess.call(["./"+testID],stdout=tcoutput)
+		if(result!=0):
+			print "C code runtime error\n"
+		
+		tcoutput.close()	
+		tcoutput=open(testID+".c.output","r+b")
+		return ''.join(tcoutput.readlines()).strip()
+		
+
 	def run(self,command,log,error):
+
+		TestCase.run(self,command,log,error)
 
 		testID=self.testID
 		tcoutput=open(testID+".c.output","wr")
@@ -190,7 +217,7 @@ class Test:
 	
 	def loadTest():
 		print "loading tests:"
-	
+
 	def addTest(self,ID,testIn,testResult,score,level):
 		
 		if(level=='0.1'):
@@ -202,8 +229,16 @@ class Test:
 		else:
 			print "Unkown test type"
 
+	def genOVutput(self,command):
+		result=[]
+		print "generating outputs:"	
+		for case in self.testCases:
+			result.append(case.run(command))
+		result.score=self.getScore()
+		return result
+	
 	def runTest(self,command,log,error):
-		self.result=None
+		self.result=Result()
 		print "running test:"	
 		for case in self.testCases:
 			self.result.result.append(case.run(command,log,error))
@@ -260,12 +295,17 @@ class Student:
 		
 class Grading:
 	def __init__(self):
-		self.workDir="/cs/student/tianjiu/Documents/ta/cs160/proj0/calc2"
+		self.workDir="/cs/student/tianjiu/Documents/ta/cs160/proj0/calc2/"
 		self.students=[]
 		self.test=Test()
 		test=""
 		self.testPath="/cs/student/tianjiu/Documents/ta/cs160/AutoGrading/testcase.xml"
+		self.testInput="/cs/student/tianjiu/Documents/ta/cs160/AutoGrading/testinput.xml"
 		self.testDir="/cs/student/tianjiu/Documents/ta/cs160/AutoGrading/testcases/"
+		self.answerPath="/cs/student/tianjiu/Documents/ta/cs160/AutoGrading/"
+
+		self.log = open("log","w")
+		self.error = open("error","w")
 		
 	def __del__(self):
 		self.log.close()
@@ -279,9 +319,52 @@ class Grading:
 		self.log.flush()
 		self.error.flush()
 		return subprocess.call(command,stdout=self.log,stderr=self.error)
+
+	def genTestOutput(self,command):
+		print "generating all the answers of test cases:\n"
+		sys.stdout.flush()
+		os.chdir(self.workDir);	
+		subprocess.call(["rm","-f",self.testPath])
+		subprocess.call(["rm","-rf",self.testDir])
+		subprocess.call(["mkdir",self.testDir])		
+		tree = ET.parse(self.testInput)
+		root = tree.getroot()
+		test=Test()
+		output=open(self.testPath,"wb")
+		output.write("<data>\n")
+		for testcase in root:
+			ID=testcase[0].text
+			Tin=testcase[1].text
+			Tscore=testcase[2].text
+			Ttype=testcase[3].text
+			
+			Tinp=self.testDir+ID+'.in'
+			Tfin=open(Tinp,"wb")
+			if(Tin==None):
+				Tin=""
+			Tfin.write(Tin)
+			Tfin.close()
+
+			test.addTest(ID,Tinp,None,Tscore,Ttype)
+			print "----------   "+ID
+			Tout=test.testCases[len(test.testCases)-1].gen(command)
+			print Tout
 	
+			output.write("\t<test>\n")
+			output.write("\t\t<ID>"+ID +"</ID>\n")
+			output.write("\t\t<Input>"+Tin +"</Input>\n")
+			output.write("\t\t<Output>"+Tout +"</Output>\n")
+			output.write("\t\t<Score>"+Tscore +"</Score>\n")
+			output.write("\t\t<Type>"+Ttype +"</Type>\n")
+			output.write("\t</test>\n")
+
+		output.write("</data>\n")
+			
+		output.close()
+
 	def genTestCase(self):
 		print "generating all test cases:\n"
+		os.chdir(self.workDir);	
 		subprocess.call(["rm","-rf",self.testDir])
 		subprocess.call(["mkdir",self.testDir])		
 		tree = ET.parse(self.testPath)
@@ -314,25 +397,27 @@ class Grading:
 		print "start grading"
 		os.chdir(self.workDir);	
 		print "working directory: \n"+os.getcwd()
-		self.log = open("log","w")
-		self.error = open("error","w")
+		#self.log = open("log","w")
+		#self.error = open("error","w")
 		self.runShell(["make","clean"])
 		if(self.runShell(["make"])!=0):
 			print "compile error"
 			return
 	
-		#case=TestCase("1","3.in","1.result","1.c.result",3)
-		#print case.run(["./calc"],self.log,self.error)
+		#case=TestP0Scan("1","1.in","1.result",1)
+		#case=TestP0Parse("1","1.in","1.result",1)
+		#case=TestP0Code("1","1.in","1.result",1)
+		#print case.gen(["./calc"])
 		#print case.errorMsg
 		#print case.testScan("","")
 
-		result=self.test.runTest(["./calc"],self.log,self.error)
-		print '\n'.join(str(i.result) for i in result.result)
-		print result.score
+		#result=self.test.runTest(["./calc"],self.log,self.error)
+		#print '\n'.join(str(i.result) for i in result.result)
+		#print result.score
 		
-		for student in self.students:
-			student.grade(["./calc"],self.log,self.error)
-			print student.name+" "+student.score
+		#for student in self.students:
+		#	student.grade(["./calc"],self.log,self.error)
+		#	print student.name+" "+student.score
 
 def main():
 	os.chdir(sys.path[0])
@@ -352,9 +437,9 @@ def main():
 
 
 proj0=Grading()
-proj0.genTestCase()
+#proj0.genTestCase()
 proj0.startGrading()
-
+proj0.genTestOutput(["./calc"])
 
 
 if __name__ == '__main__':

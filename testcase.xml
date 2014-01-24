@@ -1,77 +1,734 @@
-<testcase>
-	<!--******* test scanner  ********-->
+<data>
 	<test>
-		<id>1</id>
-		<input>m[0]=</input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>001</ID>
+		<Input>m[0] = 15 m[55]= 2 m[10] = 3 * 5 m[100] = 15 + (26) m[50] = 45 + (14 - 6)</Input>
+		<Output></Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>2</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>002</ID>
+		<Input>m[68] = m[11] - 1
+m[3] = 5 / 2 * 3
+m[4] = 2 + 2
+m[2] = 5 - (m[4] - 6)
+m[1] = 5 / 2 * 3
+m[7] = 2 + m[2]
+m[8] = 5 - m[4 - 6]</Input>
+		<Output></Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>3</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>003</ID>
+		<Input>m[60] = m[60] - 1
+m[0] = 5 / 2 * 3
+m[4] = 9999999999999992 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = m5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]</Input>
+		<Output>3</Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>4</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>004</ID>
+		<Input>m[60] = m[60] - 1
+m[0] = 5 / 2 * 3
+m[4] = 88 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = m5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]</Input>
+		<Output></Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>5</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>005</ID>
+		<Input>
+L1:
+m[4] = 15 - (m[4] - 6)
+m[5] = 25 / 12 * 3
+m[6] = 32 + m[42]
+m[7] = 45 - m[54 - 36]
+m[8] = 55 - (14 - 26)
+m[9] = 65 - m[(36 - 24)]
+print m[3]
+goto 1 if m[0]
+print m[12]
+goto 5
+print m[90]
+L2:
+print m[80]</Input>
+		<Output></Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>6</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>006</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[4] = 88 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4**4*2-2] - 6
+L1:
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]
+m[3] = 5 - (4 - 6)
+m[2] = 5 - m[(6 - 4)]
+print m[3]
+goto 1 if m[60]
+print m[2]
+goto 2
+print m[0]
+L2:
+print m[0]
+m[0] = 5 / 2 * 3
+m[4] = 2 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]
+</Input>
+		<Output></Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>7</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>007</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[4] = 88 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4**4*2-2] - 6
+L1:
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 *** 3 
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]
+m[3] = 5 - (4 - 6)
+m[2] = 5 - m[(6 - 4)]
+print m[3]
+goto 1 if m[60]
+print m[2]
+goto 2
+print m[0]
+L2:
+print m[0]
+m[0] = 5 / 2 * 3
+m[4] = 2 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]</Input>
+		<Output></Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>8</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>008</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[4] = 88 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4**4*2-2] - 6
+L1:
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]
+m[3] = 5 - (4 - 6)
+m[2] = 5 - m[(6 - 4)]
+print m[3]
+goto 1 iff m[60]
+print m[2]
+goto 2
+print m[-0]
+L2:
+print m[0]
+m[0] = 5 / 2 * 3
+m[4] = 2 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]</Input>
+		<Output>15</Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>9</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>009</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[4] = 88 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4**4*2-2] - 6
+L1:
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]
+m[3] = 5 - (4 - 6)
+m[2] = 5 - m[(6 - 4)]
+print m[3]
+goto 1 if m[60]
+print m[2]
+goto 2
+print m[0]
+L2:
+print m[0]
+m[0] = 5 / 2 * 3
+m[4] = 2 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]</Input>
+		<Output></Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
 	<test>
-		<id>10</id>
-		<input></input>
-		<output></output>
-		<score>3</score>
-		<type>0.1</type>
+		<ID>010</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[4] = 88 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4**4*2-2] - 6
+L1:
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]
+m[3] = 5 - (4 - 6)
+m[2] = 5 - m[("6 - 4)]
+print m[3]
+goto 1 if m[60]
+print m[2]
+goto 2
+print m[0]
+L2:
+print m[0]
+m[0] = 5 / 2 * 3
+m[4] = 2 + 2
+m[0] = 5 - (m[4] - 6)
+m[0] = 5 / 2 * 3
+m[0] = 2 + m[2]
+m[0] = 5 - m[4 - 6]</Input>
+		<Output>13</Output>
+		<Score>3</Score>
+		<Type>0.1</Type>
 	</test>
-	<!--******* test parser  ********-->
-	
-
-	<!--******* test code  ********-->
-</testcase>
+	<test>
+		<ID>101</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[4] = 88 + 2</Input>
+		<Output>m[num]=num/num*numm[num]=num+num</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>102</ID>
+		<Input>m[0] = 2 + m[2]
+m[43] = 5 - m[4**4*2-2] - 6
+m[0] = 5 / 2 * 3</Input>
+		<Output>m[num]=num+m[num]m[num]=num-m[num**num*num-num]-numm[num]=num/num*num</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>103</ID>
+		<Input>m[4] = 88 + 2
+m[23] = 5 - (m[4] - 6)
+m[43] = 5 / 2 * 3
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]</Input>
+		<Output>m[num]=num+numm[num]=num-(m[num]-num)m[num]=num/num*numm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numm[num]=num+m[num]m[num]=num-m[num-num]m[num]=num-(num-num)m[num]=num-m[(num-num)]printm[num]</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>104</ID>
+		<Input>m[3] = 5 - (4 - 6)
+m[2] = 5 - m[(6 - 4)]
+print m[3]
+goto 1 if m[60]
+print m[2]
+goto 2
+print m[0]
+L2:
+print m[0]
+m[10] = 5 / 2 * 3
+m[44] = 2 + 2
+m[50] = 5 - (m[4] - 6)
+m[70] = 5 / 2 * 3</Input>
+		<Output>m[num]=num-(num-num)m[num]=num-m[(num-num)]printm[num]gotonumifm[num]printm[num]gotonumprintm[num]Lnum:printm[num]m[num]=num/num*numm[num]=num+numm[num]=num-(m[num]-num)m[num]=num/num*num</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>105</ID>
+		<Input>m[4] = 88 + 2
+m[23] = 5 - (m[4] - 6)
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L2:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+goto 6
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]</Input>
+		<Output>m[num]=num+numm[num]=num-(m[num]-num)m[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numm[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num-num]m[num]=num-(num-num)m[num]=num-m[(num-num)]printm[num]</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>106</ID>
+		<Input>m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+goto 6
+m[43] = 2 + m[2]
+m[23] = 5 - (m[4] - 6)
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L2:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+goto 6
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]</Input>
+		<Output>m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-(m[num]-num)m[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num-num]m[num]=num-(num-num)m[num]=num-m[(num-num)]printm[num]</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>107</ID>
+		<Input>m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+goto 6
+m[43] = 2 + m[2]
+goto 1 if m[60]
+m[23] = 5 - (m[4] - 6)
+m[15] = 2 + m[2]
+goto 1 if m[60]
+m[56] = 5 - m[4**4*2-2] - 6
+L2:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3</Input>
+		<Output>m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numgotonumm[num]=num+m[num]gotonumifm[num]m[num]=num-(m[num]-num)m[num]=num+m[num]gotonumifm[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*num</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>108</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+goto 1 if m[60]
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3</Input>
+		<Output>m[num]=num/num*numm[num]=num+m[num]m[num]=num-m[num-num]m[num]=num-(num-num)m[num]=num-m[(num-num)]printm[num]m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)gotonumifm[num]gotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*num</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>109</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L11:
+m[75] = 5 - (m[4] - 6)
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+goto 1 if m[60]
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+L4:
+m[75] = 5 - (m[4] - 6)
+</Input>
+		<Output>m[num]=num/num*numm[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num+m[num]m[num]=num-m[num-num]m[num]=num-(num-num)m[num]=num-m[(num-num)]printm[num]m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)gotonumifm[num]gotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numLnum:m[num]=num-(m[num]-num)</Output>
+		<Score>5</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>201</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L11:
+m[75] = 5 - (m[4] - 6)
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4m[100] - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]
+m[43] = 5 / 2m[100] * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+goto 1 if m[60]
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+L4:
+m[75] = 5 - (m[4] - 6)
+</Input>
+		<Output>10</Output>
+		<Score>2</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>202</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L11:
+m[75] = 5 - (m[4] - 6)
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+goto 1 if m[60]
+goto 4
+m[15] = 2 + m[2]
+m[56] = goto 2
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+L4:
+m[75] = 5 - (m[4] - 6)
+</Input>
+		<Output>22</Output>
+		<Score>2</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>203</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L11:
+m[75] = 5 - (m[4] - 6)
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+goto 1 if m[60] 
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+goto L4:
+m[75] = 5 - (m[4] - 6)
+</Input>
+		<Output>26</Output>
+		<Score>2</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>204</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L11:
+m[75] = 5 - (m[4] - 6)
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print L2 m[3]
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+goto 1 if m[60]
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+L4:
+m[75] = 5 - (m[4] - 6)
+</Input>
+		<Output>12</Output>
+		<Score>2</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>205</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L11:
+m[75] = 5 - (m[4] - 6)
+m[43] = 2 + m[2]
+m[19] = 5 - m[4 - 6]
+m[75] = 5 - (4 - 6)
+m[46] = 5 - m[(6 - 4)]
+print m[3]
+m[43] = 5 / 2 * 3
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+goto 1 if m[1]
+goto 4
+m[15] = 2 + m[2]
+m[56] = 5 - m[4**4*2-2] - 6
+L1:
+m[75] = 5 - (m[4] - 6)
+m[68] = 5 / 2 * 3
+L4:
+m[75] = 5 - (m[4] - 6)
+</Input>
+		<Output>m[num]=num/num*numm[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num+m[num]m[num]=num-m[num-num]m[num]=num-(num-num)m[num]=num-m[(num-num)]printm[num]m[num]=num/num*numgotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)gotonumifm[num]gotonumm[num]=num+m[num]m[num]=num-m[num**num*num-num]-numLnum:m[num]=num-(m[num]-num)m[num]=num/num*numLnum:m[num]=num-(m[num]-num)</Output>
+		<Score>2</Score>
+		<Type>0.2</Type>
+	</test>
+	<test>
+		<ID>301</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[43] = 5 / 2 * 3
+print m[0]
+print m[43]
+print m[0]
+print m[43]
+</Input>
+		<Output>6
+6
+6
+6</Output>
+		<Score>3</Score>
+		<Type>0.3</Type>
+	</test>
+	<test>
+		<ID>302</ID>
+		<Input>m[43] = 5 / 2 * 3
+m[15] = 2 + m[m[43]-m[43]+43]
+m[56] = 5 - m[2**2-4+43] - 6
+print m[15]
+print m[56]
+print m[43]
+</Input>
+		<Output>8
+-7
+6</Output>
+		<Score>3</Score>
+		<Type>0.3</Type>
+	</test>
+	<test>
+		<ID>303</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[2] = 5 / 2 * 3
+print m[2]
+goto 1 if m[0]
+goto 2
+L1:
+m[75] = 5 - (m[2] - 6**3)
+L2:
+m[75] = 5 - (m[0] - 6)
+print m[0]
+print m[2]
+print m[75]
+</Input>
+		<Output>6
+6
+6
+5</Output>
+		<Score>3</Score>
+		<Type>0.3</Type>
+	</test>
+	<test>
+		<ID>304</ID>
+		<Input>m[0] = 5 / 2 * 3
+m[2] = 5 / 2 * 3
+print m[2]
+goto 1 if m[0]
+goto 2
+L1:
+m[75] = 5 - (m[2] - 6**2)
+m[13]=m[2]*m[0]
+L2:
+m[75] = 5 - (m[0] - 6)
+m[13]=m[2]*m[0]
+goto 3
+print 5*5
+L3:
+m[10]=1334
+print m[0]
+print m[2]
+print m[13]
+print m[10]
+print m[75]
+print 666444
+</Input>
+		<Output>6
+6
+6
+36
+1334
+5
+666444</Output>
+		<Score>3</Score>
+		<Type>0.3</Type>
+	</test>
+	<test>
+		<ID>305</ID>
+		<Input>m[1] = 5 / 2 * 3
+m[2]=2**3**2
+m[3]=m[m[2]/2+11]
+m[4] = 2 + m[2]
+m[5] = 5 - m[2] - 6
+print 84848492
+print m[5]
+print m[3]
+goto 1
+m[5] = 5 - m[2] - 6
+print 124324
+print m[5]
+L1:
+m[6] = 5 - (m[5] - 6)
+m[7] =3*11-4/2**2
+m[8] = 2 + m[7]
+m[9]=3**2-2**2**2-5
+m[11] = 5 - m[11 - 6]
+m[12] = 5 - (4 - 6)
+m[13] = 5 - (6**8)
+m[14] = 5 / 2 * 3
+print m[11]
+print m[14]
+m[15**1] = 2 + m[13]
+m[16] = 5 - m[14-2] - 6
+L2:
+m[17] = 5 - (m[16] - 6)
+goto 4 if m[16]
+goto 3
+m[15] = 2 + m[7]
+m[16] = 5 - m[4*2-2+7] - 6
+L3:
+m[15] = 5 - (m[15] - 6)
+m[16] = 5 / 2 * 3
+goto 5
+L4:
+m[25] = 5 - (m[4] - 6)
+print m[25]
+L5:
+print m[35]
+print m[15]
+print m[16]
+</Input>
+		<Output>84848492
+-513
+32767
+518
+6
+-503
+0
+-1679609
+-8</Output>
+		<Score>3</Score>
+		<Type>0.3</Type>
+	</test>
+</data>
