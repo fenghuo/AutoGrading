@@ -17,11 +17,29 @@ import sys
 import tempfile
 import time
 import subprocess
+import datetime
 import csv
 import xml.etree.ElementTree as ET
 from os.path import isdir, join
 from optparse import OptionGroup, OptionParser
 from subprocess import Popen, PIPE, STDOUT,call
+
+class Shell:
+	@staticmethod
+	def call(command, stdin=None,stdout=None,stderr=None, timeout=1):
+		start = datetime.datetime.now()
+		process = subprocess.Popen(command, stdin=stdin, stdout=stdout, stderr=stderr)
+		while process.poll() is None:
+			time.sleep(0.1)
+			now = datetime.datetime.now()
+			if (now - start).seconds> timeout:
+				os.kill(process.pid, signal.SIGKILL)
+				os.waitpid(-1, os.WNOHANG)
+				print "Execution Timeout!"
+				return 408
+		if(process.stderr!=None):
+			print ''.join(process.stderr.readlines())
+		return process.returncode
 
 class TestCase:
 	def __init__(self,ID,testIn,testResult,score):
@@ -29,31 +47,33 @@ class TestCase:
 		self.testIn=testIn
 		self.testResult=testResult
 		self.score=score
-		self.errorMsg=""
 		self.result=CaseResult(ID,1,"",score)
+		self.timeout=1
 		
 	def load():
 		print "loading test case: "+testID	
 		
 	def gen(self,command):
-		self.errorMsg=""
 		testID=self.testID
+		print "generating test cases: "+str(testID)
 		tin=open(self.testIn,"r")
 		tout=open(testID+".output","wr")
 		tcode=open(testID+".c","wr")
-		subprocess.call(command,stdin=tin,stdout=tout,stderr=tcode)
+		Shell.call(command,stdin=tin,stdout=tout,stderr=tcode,timeout=5)
 		tin.close()
 		tout.close()
 		tcode.close()
 
 
 	def run(self,command,log,error):
-		self.errorMsg=""
 		testID=self.testID
+		print "running test cases: "+str(testID)
 		tin=open(self.testIn,"r")
 		tout=open(testID+".output","wr")
 		tcode=open(testID+".c","wr")
-		subprocess.call(command,stdin=tin,stdout=tout,stderr=tcode)
+		result=Shell.call(command,stdin=tin,stdout=tout,stderr=tcode)
+		if(result==408):
+			self.result.error="Execution Timeout!\n"		
 		tin.close()
 		tout.close()
 		tcode.close()
@@ -69,14 +89,19 @@ class TestP0Scan(TestCase):
 			if(line.find("scan error")>=0):
 				errorLine=line[line.find('line')+4:].strip()
 				break
+		tout.close()
 		return errorLine
 
 	def run(self,command,log,error):
 
 		TestCase.run(self,command,log,error)
 
-		tout=open(self.testID+".output","r").readlines()
-		tresult=open(self.testResult,"r").readlines()
+		toutt=open(self.testID+".output","r")
+		tout=toutt.readlines()
+		toutt.close()
+		tresultt=open(self.testResult,"r")
+		tresult=tresultt.readlines()
+		tresultt.close()
 		lineCounter=""
 		lineExpect=''.join(tresult)
 		
@@ -84,10 +109,10 @@ class TestP0Scan(TestCase):
 			if(line.find("scan error")>=0):
 				lineCounter=line[line.find('line')+4:]				
 				break
-		if(lineCounter==lineExpect):
+		if(lineCounter.strip()==lineExpect.strip()):
 			self.result.result=0
 		else:
-			self.result.errorMsg+="Scanner Error! Expect Error Line: "+str(lineExpect)+" ,your error line: "+str(lineCounter)+"\n"
+			self.result.error+="Scanner Error! Expect Error Line: "+str(lineExpect)+" ,your error line: "+str(lineCounter)+"\n"
 			self.result.result=1
 		return self.result
 
@@ -119,6 +144,7 @@ class TestP0Parse(TestCase):
 		result=''.join(result).strip()	
 		if(errorLine!=None):
 			result=errorLine
+		tout.close()
 		return result
 
 
@@ -143,7 +169,9 @@ class TestP0Parse(TestCase):
 					else:
 						result.append(c)
 			
-		tresult=open(self.testResult,"r").readlines()
+		tresultt=open(self.testResult,"r")
+		tresult=tresultt.readlines()
+		tresultt.close()
 		result=''.join(result).strip()	
 		tresult=''.join(tresult).strip()
 		if(errorLine!=None):
@@ -151,8 +179,9 @@ class TestP0Parse(TestCase):
 		if(result==tresult):
 			self.result.result=0
 		else:
-			self.result.errorMsg+="Parse Tree Error\n"	
+			self.result.error+="Parse Tree Error\n"	
 			self.result.result=1
+		tout.close()
 		return self.result
 
 class TestP0Code(TestCase):
@@ -162,16 +191,17 @@ class TestP0Code(TestCase):
 		testID=self.testID
 		tcoutput=open(testID+".c.output","wr")
 		result=0
-		result=subprocess.call(["gcc","-lm",testID+'.c',"-o",testID])
+		result=Shell.call(["gcc","-lm",testID+'.c',"-o",testID])
 		if(result!=0):
 			print "C code Compile error\n"
 		
-		result=subprocess.call(["./"+testID],stdout=tcoutput)
+		result=Shell.call(["./"+testID],stdout=tcoutput)
 		if(result!=0):
 			print "C code runtime error\n"
 		
 		tcoutput.close()	
 		tcoutput=open(testID+".c.output","r+b")
+		tcoutput.close()
 		return ''.join(tcoutput.readlines()).strip()
 		
 
@@ -182,17 +212,22 @@ class TestP0Code(TestCase):
 		testID=self.testID
 		tcoutput=open(testID+".c.output","wr")
 		result=0
-		result=subprocess.call(["gcc","-lm",testID+'.c',"-o",testID],stdout=log,stderr=error)
+		result=Shell.call(["gcc","-lm",testID+'.c',"-o",testID],stdout=log,stderr=error)
 		if(result!=0):
-			self.result.errorMsg+="C code Compile error\n"
-		
-		result=subprocess.call(["./"+testID],stdout=tcoutput,stderr=error)
-		if(result!=0):
-			self.result.errorMsg+="C code runtime error\n"
+			self.result.error+="C code Compile error\n"
 
-		result=subprocess.call(["diff","-bBi",self.testResult,testID+".c.output"],stdout=log,stderr=error)
-		if(result!=0):
-			self.result.errorMsg+="C code execution output error\n"
+		if(result==0):			
+			result=Shell.call(["./"+testID],stdout=tcoutput,stderr=error)
+			if(result!=0):
+				self.result.error+="C code runtime error\n"
+
+		if(result==0):
+			result=Shell.call(["diff","-bBi",self.testResult,testID+".c.output"],stdout=log,stderr=error)
+			if(result!=0):
+				self.result.error+="C code execution output error\n"
+		
+		if(result==408):
+			self.result.error="Execution Timeout!\n"		
 				
 		tcoutput.close()
 		self.result.result=result
@@ -255,7 +290,7 @@ class Test:
 			
 class Student:
 	def __init__(self,alias):
-		self.name=""
+		self.name=alias
 		self.testResult=None
 
 	def grade(self,test):
@@ -281,21 +316,28 @@ class Student:
 		s.quit()
 	
 	def save(self,filePath):
-		fp = open(textfile, 'ab')	
-		fp.write("<name>"+self.name+"</name>\n")
-		fp.write("<result>\n")
-		fp.write("<total>"+str(self.testResult.score)+"</total>\n")	
-		fp.write("<TestCase>\n")
-		for r in self.testResult:
-			fp.write("<ID>"+str(r.ID)+"</ID>\n")
-			fp.write("<result>"+str(r.result)+"</result>\n")
-			fp.write("<error>"+str(r.error)+"</error>\n")
-		fp.write("<TestCase>\n")		
-		fp.write("</result>\n")
+		fp = open(filePath, 'wb')
+		fp.write("<html><body border='1'>\n")	
+		fp.write("<h1>CS160: The report of project 0 grading:</h1><h1> Name: "+self.name+"</h1>\n")
+		fp.write("<h3> Total Score: "+str(self.testResult.score)+" / 100 </h3>\n")	
+		fp.write("<table><tr><th>ID</th><th>Result</th><th>Error Message</th></tr>\n")
+		for r in self.testResult.result:
+			fp.write("<tr>\n")
+			fp.write("<td>"+str(r.ID)+"</td>\n")
+			rs="Pass"
+			if(r.result!=0):
+				rs="Fail"
+			fp.write("<td>"+str(rs)+"</td>\n")
+			fp.write("<td>"+str(r.error)+"</td>\n")
+			fp.write("</tr>")
+		fp.write("</table>\n")	
+		fp.write("</body></html>")
+		fp.close()
 		
 class Grading:
 	def __init__(self):
-		self.workDir="/cs/student/tianjiu/Documents/ta/cs160/proj0/calc2/"
+		#self.workDir="/cs/student/tianjiu/Documents/ta/cs160/proj0/calc2/"
+		self.workDir="/cs/student/tianjiu/Documents/ta/cs160/AutoGrading/solution/"
 		self.students=[]
 		self.test=Test()
 		test=""
@@ -318,15 +360,15 @@ class Grading:
 		self.error.write("command: "+ ' '.join(command)+'\n')
 		self.log.flush()
 		self.error.flush()
-		return subprocess.call(command,stdout=self.log,stderr=self.error)
+		return Shell.call(command,stdout=self.log,stderr=self.error)
 
 	def genTestOutput(self,command):
 		print "generating all the answers of test cases:\n"
 		sys.stdout.flush()
 		os.chdir(self.workDir);	
-		subprocess.call(["rm","-f",self.testPath])
-		subprocess.call(["rm","-rf",self.testDir])
-		subprocess.call(["mkdir",self.testDir])		
+		Shell.call(["rm","-f",self.testPath])
+		Shell.call(["rm","-rf",self.testDir])
+		Shell.call(["mkdir",self.testDir])		
 		tree = ET.parse(self.testInput)
 		root = tree.getroot()
 		test=Test()
@@ -361,12 +403,28 @@ class Grading:
 		output.write("</data>\n")
 			
 		output.close()
+	
+	def getStudentName(self):
+		fr=open("studentList","rb+")
+		fw=open("studentName","wb")
+		for alias in fr.readlines():
+			alias=alias.strip()
+			process = subprocess.Popen(["finger",alias],stdout=PIPE)
+			temp=process.stdout.read()	
+			name=temp[temp.find("Name:")+5:temp.find("Directory")].strip()
+			lastName=name[name.rfind(" "):]
+			firstName=name[0:name.find(" ")]
+			print lastName+" --- "+ alias+"\t"+name+"\n"	
+			fw.write(lastName+"\t"+alias+"\t"+firstName+"\n")
+		fr.close()
+		fw.close()
+		
 
 	def genTestCase(self):
 		print "generating all test cases:\n"
 		os.chdir(self.workDir);	
-		subprocess.call(["rm","-rf",self.testDir])
-		subprocess.call(["mkdir",self.testDir])		
+		Shell.call(["rm","-rf",self.testDir])
+		Shell.call(["mkdir",self.testDir])		
 		tree = ET.parse(self.testPath)
 		root = tree.getroot()
 		for testcase in root:
@@ -393,7 +451,7 @@ class Grading:
 			self.test.addTest(ID,Tinp,Toutp,Tscore,Tlevel)
 
 	def startGrading(self):
-		subprocess.call("clear")
+		Shell.call("clear")
 		print "start grading"
 		os.chdir(self.workDir);	
 		print "working directory: \n"+os.getcwd()
@@ -411,10 +469,17 @@ class Grading:
 		#print case.errorMsg
 		#print case.testScan("","")
 
-		#result=self.test.runTest(["./calc"],self.log,self.error)
-		#print '\n'.join(str(i.result) for i in result.result)
-		#print result.score
-		
+		result=self.test.runTest(["./calc"],self.log,self.error)
+		for r in result.result:		
+			print r.ID
+			print "\t"+str(r.result)
+			if(r.result!=0):
+				print "\t"+r.error
+		print result.score
+
+		s=Student("Keith")
+		s.testResult=result
+		s.save("Report.htm")
 		#for student in self.students:
 		#	student.grade(["./calc"],self.log,self.error)
 		#	print student.name+" "+student.score
@@ -438,8 +503,10 @@ def main():
 
 proj0=Grading()
 #proj0.genTestCase()
-proj0.startGrading()
-proj0.genTestOutput(["./calc"])
+#proj0.startGrading()
+#proj0.genTestOutput(["./calc"])
+proj0.getStudentName()
+
 
 
 if __name__ == '__main__':
