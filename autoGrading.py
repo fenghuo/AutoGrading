@@ -245,6 +245,10 @@ class Result:
 		self.score=0
 		self.result=[]
 
+	def load(self,filePath):
+		fp=open(filePath,"rb")
+		
+
 class Test:
 	def __init__(self):
 		self.testCases=[]
@@ -264,7 +268,7 @@ class Test:
 		else:
 			print "Unkown test type"
 
-	def genOVutput(self,command):
+	def genOutput(self,command):
 		result=[]
 		print "generating outputs:"	
 		for case in self.testCases:
@@ -289,13 +293,23 @@ class Test:
 		
 			
 class Student:
-	def __init__(self,alias):
+	def __init__(self,alias,first,last,email):
 		self.name=alias
 		self.testResult=None
+		self.first=first
+		self.last=last
+		self.email=email
+		self.graded=false
 
 	def grade(self,test):
 		print "grading:"
 		self.result=test.runTest(command,log,error)
+
+	def dump(self,fp):
+		fp.write(self.alias+"\t\t")
+		for case in self.result.result:
+			fp.write(case.result+"\t")
+		fp.write("\n")
 
 	def email(self):
 		fp = open(textfile, 'rb')
@@ -505,8 +519,11 @@ proj0=Grading()
 #proj0.genTestCase()
 #proj0.startGrading()
 #proj0.genTestOutput(["./calc"])
-proj0.getStudentName()
-
+#proj0.getStudentName()
+try:
+	open("sdfsdf","r")
+except:
+	print "No File"
 
 
 if __name__ == '__main__':
