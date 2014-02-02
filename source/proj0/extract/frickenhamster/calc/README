@@ -1,0 +1,9 @@
+Alex Yan
+Proj 0
+5608120
+
+First I created the scanner. I used getchars to check the next token. Most of the stuff is done in next_token, just a logic problem.
+Then I fixed the grammar to be LL(1). This consisted of setting precedence for the expressions, and then getting rid of left recursion. I named my prime Nonterminals Imoutos because Imoutos means little sister in Japanese.
+Then I made the parser. The First, I initalized all my nonterminals. Then made a function for each production rule, in which I translated the grammar to c++ code. It outputted the parse tree which looked right.
+I then started emitting C code. First I hardoutted the headers and initalizations.
+Then I outputted directly from the parser functions expect for expression. Because pow needs to know the expression it is from since pow needs to printed before. I did this by referencing strings and returning booleans. The C code is outputted to cerr which compiles and works.

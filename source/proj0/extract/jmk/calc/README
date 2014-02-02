@@ -1,0 +1,23 @@
+Jonathan Kassan cs160 Project0 ~~ creating a compiler for a simple calculator language.
+
+I started by implementing the scanner, most of the work of my scanner is done by the next_token function and the eat_token function. The next token function is used to return the token type which it just scanned by using the cin.peek method. I made a switch statement to handle all of the terminals, one of the errors i eventually came across was that for the Terminals that are longer than one character i had to "Eat" the tokens to get to the next character to ensure that the token was of the type i thought for example for print. once i read 'p' i can not be sure whether it is the print terminal so i have to eat 'p' to get to 'r' so on and so forth. An issue i ran into was that after i ate all these tokens i didn't put them back onto the stack, i believe i fixed that. Then that brings up the problem of having all of these extra terminal characters on the stack which are unneccesary, i end up consumning all of these tokens later when i call the eat_token method.
+
+Before the switch statement i have three little helper if statements, one of them eats white spaces, another eats new lines and counts line numbers to spit our the correct line number later and the third helps me identify numbers. The number comes in as a character i convert it to a string i convert that string to a c string and then i use the atoi function on it. I atoi it into a double variable. 
+
+There is an issue when you do atoi on a value greater than an int but for this program it is only suppose to be able to handle ints, the atoi function overflows, which is a slight problem for outputting the correct number with the range error function but nonethe less it spits out the correct error it tells you that there is a range error and it tells you the line number, if it is a negative number i just default the range error to -1.
+
+Then i went on to develop an LL(1) grammar, which is in the bison file.
+
+Then i tried to implement the grammar with c++ code in the parser_t class.
+
+I used switch statements in almost all of the productions, the magic happens when i eat the token- when i say magic i mean thats when it keeps the scanner moving along pops values off of the stack for the DOT program to be able to visuzalize.
+
+I used the location of the eat tokens when i was implementing the c code in terms of when i wanted to print to cerr, the eat tokens are where i need to place the terminals so if there was an eat_token plus then i would know that's where i need to pert cerr<<"+"
+
+Some known issues which i haven't had time to fix: 
+
+If there is an EOF touching my Terminals or nonTerminals then my program will catch a mismatch error, 
+
+For negative numbers i couldn't figure out how to tell the differnce between -7 or 5 -7, so if there isn't a space after a minus sign then it counts it as a negative number and will throw a scanner error
+
+MY exponent function doesn't work for the c code, i had figured out how to implement it if it just had number ** number ** number, but then i changed my code to try and get it to work for all expressions, i couldn't get it to work now its 11:55 and i don't have time to re implement ** :(

@@ -1,0 +1,1 @@
+m [ num ] = m [ num ] - num m [ num ] = num / num * num m [ num ] = num + num m [ num ] = num - ( m [ num ] - num ) m [ num ] = num / num * num m [ num ] = num + m [ num ] m [ num ] = num - m [ num - num ] eof 

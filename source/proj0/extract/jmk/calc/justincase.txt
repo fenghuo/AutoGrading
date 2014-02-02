@@ -1,0 +1,109 @@
+
+
+void parser_t::Statements(){
+
+	parsetree.push(NT_Statements);
+
+	switch( scanner.next_token() ) 
+	{
+		case NT_Statements:
+			Statements();
+			break;
+		case NT_Statement:
+			
+			Statement();
+			break;
+		case T_eof:
+			parsetree.drawepsilon();
+			break;
+		default:
+			syntax_error(NT_Statements);
+			break;
+	}
+
+	//now that we are done with List, we can pop it from the data
+	//stucture that is tracking it for drawing the parse tree
+	parsetree.pop();
+
+}
+
+
+//WRITEME: you will need to put the rest of the procedures here
+void parser_t::Statement(){
+
+	parsetree.push(NT_Statement);
+
+	switch( scanner.next_token() ) 
+	{
+		case NT_Label:
+			Label();
+			break;
+		case NT_Jump:
+			Jump();
+			break;
+		case NT_Assignment:
+			Assignment();
+			break;
+		case NT_Print:
+			Print();
+			break;
+		case T_eof:
+			parsetree.drawepsilon();
+			break;
+		default:
+			syntax_error(NT_Statement);
+			break;
+	}
+
+	//now that we are done with List, we can pop it from the data
+	//stucture that is tracking it for drawing the parse tree
+	parsetree.pop();
+
+}
+
+//I don't know what to do with label yet i think scanner.nexttoken is still on NT_Label so it will always syntax error
+void parser_t::Label(){
+
+	parsetree.push(NT_Label);
+
+	switch( scanner.next_token() ) 
+	{
+		case T_num:
+			eat_token(T_num);
+			break;
+		case T_eof:
+			parsetree.drawepsilon();
+			break;
+		default:
+			syntax_error(NT_Label);
+			break;
+	}
+
+	//now that we are done with List, we can pop it from the data
+	//stucture that is tracking it for drawing the parse tree
+	parsetree.pop();
+
+}
+
+void parser_t::Jump(){
+
+	parsetree.push(NT_Jump);
+
+	switch( scanner.next_token() ) 
+	{
+		case T_num:
+			eat_token(T_num);
+			break;
+		case T_eof:
+			parsetree.drawepsilon();
+			break;
+		default:
+			syntax_error(NT_Jump);
+			break;
+	}
+
+	//now that we are done with List, we can pop it from the data
+	//stucture that is tracking it for drawing the parse tree
+	parsetree.pop();
+
+}

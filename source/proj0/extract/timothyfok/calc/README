@@ -1,0 +1,16 @@
+Name: Timothy Fok
+Perm: 4769063
+
+I implemented the scanner, parser, and emitter to C code. I implemented the scanner using getchar() and ungetc(). It should work with tokens with the grammar. I also changed the grammer to be unambiguous using the First and Follow sets done through the lookahead token. 
+
+The parser parses everything correctly under a recursive descent strategy.
+
+IMPORTANT: Remember, whitespace is ingored so incorrect input like 
+
+m[2] = 34
+m[3]
+4
+
+will output an error on the line with the 4. IE, if this input was the entire file, then the error will be on line 3 because the parser was expecting an = sign on line 3, but found a num instead. 
+
+The emit code for c does it all by outputing the code to stderr. I used cerr according to where the parser was to emit the proper c code. The stderr code should work with the typical compilation and run commands. 

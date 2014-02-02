@@ -1,0 +1,9 @@
+Omar Masri - CS160 Project 0 - README
+
+At first, I ran into some issues implementing my scanner, namely the case of the T_power token in my next_token and eat_token methods. I first tried eating the first '*' from the stream and then peeking at the next character to see if it was another '*' to decide whether to return the T_power token or not. This posed a problem with my scanner's output when testing, so I ended up solving it by using a built in function called cin.putback() which takes a single char. I put back the '*' so that my next_token() method no longer ate up part of the stream, and it resolved the problem.
+
+I spent a good amount of time making my grammar support precedence, and then I had to do some supplemental reading on removing left recursion and left factoring to convert it to LL(1). 
+
+Implementing my recursive descent parser was more or less intuitive once I had my grammar fixed, using the first and follow sets, it was just plugging in the rules; although, once I had to output c code, it got a bit fuzzy especially with the pow function call from the cmath library. I eventually figured out a way to do it by passing around strings by reference and building on them. 
+
+Reporting syntax errors that occur at the end of a line sometimes reported the error on the next line.. I suspect it has to do with the newline character

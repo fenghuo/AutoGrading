@@ -1,0 +1,67 @@
+
+//WRITEME: the Start() function is not quite right.  Right now
+//it is made to parse the grammar:
+//       Start -> '+' Start | EOF
+//which is not a very interesting language.  It has been included
+//so you can see the basics of how to structure your recursive 
+//decent code.
+
+//Here is an example
+void parser_t::Start()
+{
+       //push this non-terminal onto the parse tree.
+       //the parsetree class is just for drawing the finished
+       //parse tree, and should in should have no effect the actual
+       //parsing of the data
+       parsetree.push(NT_Start);
+
+       switch( scanner.next_token() ) 
+       {
+              case T_plus:
+                     eat_token(T_plus);
+                     Start();
+                     break;
+              case T_eof:
+                     parsetree.drawepsilon();
+                     break;
+              default:
+                     syntax_error(NT_Start);
+                     break;
+       }
+
+       //now that we are done with List, we can pop it from the data
+       //stucture that is tracking it for drawing the parse tree
+       parsetree.pop();
+}
+
+
+
+
+
+              Expression    : variable moreVariables
+              ;
+
+moreVariables : '+' variable
+              | '-' variable
+              | epsilon
+              ;
+
+variable      : term moreTerms
+              ;
+
+moreTerms     : '*' term
+              | '/' term
+              | epsilon
+              ;
+
+term          : factor moreFactors
+              ;
+
+moreFactors   : 'e' factor
+              | epsilon
+              ;
+
+factor        : '(' Expression ')'
+              | 'm' '[' Expression ']'
+              | 'n'
+              ;

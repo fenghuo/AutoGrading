@@ -1,0 +1,14 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+int m[100];
+m[0]=2+m[2];
+m[43]=5-m[4**3*1-2]-6;
+m[0]=5/2*3;
+return 0;
+}

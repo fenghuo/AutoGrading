@@ -1,0 +1,45 @@
+README
+calc: Scanner and Parser Implementation
+~~~~~~~~~~~~~~~~~~~~~~~~
+Author: Caressa Arias
+Perm: 5938600
+Class: Computer Science 160
+Project: 0
+Last Updated: 1/22/14
+~~~~~~~~~~~~~~~~~~~~~~~~
+calc.cpp: runs the scanner and parser
+input.c: runs the c implementation
+
+What I did:
+~~~~~~~~~~~~~~~~~~~~~~~~
+In this project I made 2 vectors to hold the input stream. I started by using getchar() on cin to group the characters into tokens. I then pushed these tokens onto my vectors. The token type was pushed onto the tokenList vector and the actual string representation would be pushed onto the parseList vector.
+The parser then follows my grammar and eats tokens by calling the eat_token function which just erases the first token on the token list and parse list vectors. Whenever a token is eaten, the parser writes to the stderr stream. I also implemented a function called next_parse() which returns the next token's string representation, which is used to print to the stderr stream. My parse list is the only vector stream that has new lines so it counts and deletes it everytime it shows up during eat_token.
+
+Problems:
+~~~~~~~~~~~~~~~~~~~~~~~~
+I had problems emitting the power operator for c code because it requires knowing the entire expression before printing since the power operator is used through the pow() function.
+
+Compiling/Running Instructions:
+~~~~~~~~~~~~~~~~~~~~~~~~
+to compile scanner/parser:
+make
+
+to run scanner/parser:
+./calc < INPUTFILE
+
+to run scanner/parser and generate output:
+./calc < INPUTFILE > PARSETREE.dot 2> CFILE.c
+
+to make .dot file visible through pdf:
+dot -Tpdf < PARSETREE.dot > PARSETREE.pdf
+
+to compile the c file:
+make CFILE
+
+to run the c file:
+./CFILE
+
+to clean object files:
+make clean
+
+

@@ -1,0 +1,770 @@
+Grammar
+
+    0 $accept: Start $end
+
+    1 Start: Statements
+
+    2 Statements: Label Statement
+    3           | Jump Statement
+    4           | Assignment Statement
+    5           | Print Statement
+
+    6 Statement: Label Statement
+    7          | Jump Statement
+    8          | Assignment Statement
+    9          | Print Statement
+   10          | /* empty */
+
+   11 Label: 'l' 'n' ':'
+
+   12 Jump: 'g' 'n' Jump_prime
+
+   13 Jump_prime: 'i' Exp
+   14           | /* empty */
+
+   15 Assignment: 'm' '[' Exp ']' '=' Exp
+
+   16 Print: 'p' Exp
+
+   17 Exp: Term Exp_prime
+
+   18 Exp_prime: '+' Term Exp_prime
+   19          | '-' Term Exp_prime
+   20          | /* empty */
+
+   21 Term: Factor Term_prime
+
+   22 Term_prime: '*' Factor Term_prime
+   23           | '/' Factor Term_prime
+   24           | /* empty */
+
+   25 Factor: B Factor_prime
+
+   26 Factor_prime: 'e' B Factor_prime
+   27             | /* empty */
+
+   28 B: '(' Exp ')'
+   29  | 'm' '[' Exp ']'
+   30  | 'n'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 28
+')' (41) 28
+'*' (42) 22
+'+' (43) 18
+'-' (45) 19
+'/' (47) 23
+':' (58) 11
+'=' (61) 15
+'[' (91) 15 29
+']' (93) 15 29
+'e' (101) 26
+'g' (103) 12
+'i' (105) 13
+'l' (108) 11
+'m' (109) 15 29
+'n' (110) 11 12 30
+'p' (112) 16
+error (256)
+
+
+Nonterminals, with rules where they appear
+
+$accept (20)
+    on left: 0
+Start (21)
+    on left: 1, on right: 0
+Statements (22)
+    on left: 2 3 4 5, on right: 1
+Statement (23)
+    on left: 6 7 8 9 10, on right: 2 3 4 5 6 7 8 9
+Label (24)
+    on left: 11, on right: 2 6
+Jump (25)
+    on left: 12, on right: 3 7
+Jump_prime (26)
+    on left: 13 14, on right: 12
+Assignment (27)
+    on left: 15, on right: 4 8
+Print (28)
+    on left: 16, on right: 5 9
+Exp (29)
+    on left: 17, on right: 13 15 16 28 29
+Exp_prime (30)
+    on left: 18 19 20, on right: 17 18 19
+Term (31)
+    on left: 21, on right: 17 18 19
+Term_prime (32)
+    on left: 22 23 24, on right: 21 22 23
+Factor (33)
+    on left: 25, on right: 21 22 23
+Factor_prime (34)
+    on left: 26 27, on right: 25 26
+B (35)
+    on left: 28 29 30, on right: 25 26
+
+
+state 0
+
+    0 $accept: . Start $end
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    Start       go to state 5
+    Statements  go to state 6
+    Label       go to state 7
+    Jump        go to state 8
+    Assignment  go to state 9
+    Print       go to state 10
+
+
+state 1
+
+   11 Label: 'l' . 'n' ':'
+
+    'n'  shift, and go to state 11
+
+
+state 2
+
+   12 Jump: 'g' . 'n' Jump_prime
+
+    'n'  shift, and go to state 12
+
+
+state 3
+
+   15 Assignment: 'm' . '[' Exp ']' '=' Exp
+
+    '['  shift, and go to state 13
+
+
+state 4
+
+   16 Print: 'p' . Exp
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Exp     go to state 17
+    Term    go to state 18
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 5
+
+    0 $accept: Start . $end
+
+    $end  shift, and go to state 21
+
+
+state 6
+
+    1 Start: Statements .
+
+    $default  reduce using rule 1 (Start)
+
+
+state 7
+
+    2 Statements: Label . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 22
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 8
+
+    3 Statements: Jump . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 27
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 9
+
+    4 Statements: Assignment . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 28
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 10
+
+    5 Statements: Print . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 29
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 11
+
+   11 Label: 'l' 'n' . ':'
+
+    ':'  shift, and go to state 30
+
+
+state 12
+
+   12 Jump: 'g' 'n' . Jump_prime
+
+    'i'  shift, and go to state 31
+
+    $default  reduce using rule 14 (Jump_prime)
+
+    Jump_prime  go to state 32
+
+
+state 13
+
+   15 Assignment: 'm' '[' . Exp ']' '=' Exp
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Exp     go to state 33
+    Term    go to state 18
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 14
+
+   30 B: 'n' .
+
+    $default  reduce using rule 30 (B)
+
+
+state 15
+
+   29 B: 'm' . '[' Exp ']'
+
+    '['  shift, and go to state 34
+
+
+state 16
+
+   28 B: '(' . Exp ')'
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Exp     go to state 35
+    Term    go to state 18
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 17
+
+   16 Print: 'p' Exp .
+
+    $default  reduce using rule 16 (Print)
+
+
+state 18
+
+   17 Exp: Term . Exp_prime
+
+    '+'  shift, and go to state 36
+    '-'  shift, and go to state 37
+
+    $default  reduce using rule 20 (Exp_prime)
+
+    Exp_prime  go to state 38
+
+
+state 19
+
+   21 Term: Factor . Term_prime
+
+    '*'  shift, and go to state 39
+    '/'  shift, and go to state 40
+
+    $default  reduce using rule 24 (Term_prime)
+
+    Term_prime  go to state 41
+
+
+state 20
+
+   25 Factor: B . Factor_prime
+
+    'e'  shift, and go to state 42
+
+    $default  reduce using rule 27 (Factor_prime)
+
+    Factor_prime  go to state 43
+
+
+state 21
+
+    0 $accept: Start $end .
+
+    $default  accept
+
+
+state 22
+
+    2 Statements: Label Statement .
+
+    $default  reduce using rule 2 (Statements)
+
+
+state 23
+
+    6 Statement: Label . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 44
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 24
+
+    7 Statement: Jump . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 45
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 25
+
+    8 Statement: Assignment . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 46
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 26
+
+    9 Statement: Print . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 10 (Statement)
+
+    Statement   go to state 47
+    Label       go to state 23
+    Jump        go to state 24
+    Assignment  go to state 25
+    Print       go to state 26
+
+
+state 27
+
+    3 Statements: Jump Statement .
+
+    $default  reduce using rule 3 (Statements)
+
+
+state 28
+
+    4 Statements: Assignment Statement .
+
+    $default  reduce using rule 4 (Statements)
+
+
+state 29
+
+    5 Statements: Print Statement .
+
+    $default  reduce using rule 5 (Statements)
+
+
+state 30
+
+   11 Label: 'l' 'n' ':' .
+
+    $default  reduce using rule 11 (Label)
+
+
+state 31
+
+   13 Jump_prime: 'i' . Exp
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Exp     go to state 48
+    Term    go to state 18
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 32
+
+   12 Jump: 'g' 'n' Jump_prime .
+
+    $default  reduce using rule 12 (Jump)
+
+
+state 33
+
+   15 Assignment: 'm' '[' Exp . ']' '=' Exp
+
+    ']'  shift, and go to state 49
+
+
+state 34
+
+   29 B: 'm' '[' . Exp ']'
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Exp     go to state 50
+    Term    go to state 18
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 35
+
+   28 B: '(' Exp . ')'
+
+    ')'  shift, and go to state 51
+
+
+state 36
+
+   18 Exp_prime: '+' . Term Exp_prime
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Term    go to state 52
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 37
+
+   19 Exp_prime: '-' . Term Exp_prime
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Term    go to state 53
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 38
+
+   17 Exp: Term Exp_prime .
+
+    $default  reduce using rule 17 (Exp)
+
+
+state 39
+
+   22 Term_prime: '*' . Factor Term_prime
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Factor  go to state 54
+    B       go to state 20
+
+
+state 40
+
+   23 Term_prime: '/' . Factor Term_prime
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Factor  go to state 55
+    B       go to state 20
+
+
+state 41
+
+   21 Term: Factor Term_prime .
+
+    $default  reduce using rule 21 (Term)
+
+
+state 42
+
+   26 Factor_prime: 'e' . B Factor_prime
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    B  go to state 56
+
+
+state 43
+
+   25 Factor: B Factor_prime .
+
+    $default  reduce using rule 25 (Factor)
+
+
+state 44
+
+    6 Statement: Label Statement .
+
+    $default  reduce using rule 6 (Statement)
+
+
+state 45
+
+    7 Statement: Jump Statement .
+
+    $default  reduce using rule 7 (Statement)
+
+
+state 46
+
+    8 Statement: Assignment Statement .
+
+    $default  reduce using rule 8 (Statement)
+
+
+state 47
+
+    9 Statement: Print Statement .
+
+    $default  reduce using rule 9 (Statement)
+
+
+state 48
+
+   13 Jump_prime: 'i' Exp .
+
+    $default  reduce using rule 13 (Jump_prime)
+
+
+state 49
+
+   15 Assignment: 'm' '[' Exp ']' . '=' Exp
+
+    '='  shift, and go to state 57
+
+
+state 50
+
+   29 B: 'm' '[' Exp . ']'
+
+    ']'  shift, and go to state 58
+
+
+state 51
+
+   28 B: '(' Exp ')' .
+
+    $default  reduce using rule 28 (B)
+
+
+state 52
+
+   18 Exp_prime: '+' Term . Exp_prime
+
+    '+'  shift, and go to state 36
+    '-'  shift, and go to state 37
+
+    $default  reduce using rule 20 (Exp_prime)
+
+    Exp_prime  go to state 59
+
+
+state 53
+
+   19 Exp_prime: '-' Term . Exp_prime
+
+    '+'  shift, and go to state 36
+    '-'  shift, and go to state 37
+
+    $default  reduce using rule 20 (Exp_prime)
+
+    Exp_prime  go to state 60
+
+
+state 54
+
+   22 Term_prime: '*' Factor . Term_prime
+
+    '*'  shift, and go to state 39
+    '/'  shift, and go to state 40
+
+    $default  reduce using rule 24 (Term_prime)
+
+    Term_prime  go to state 61
+
+
+state 55
+
+   23 Term_prime: '/' Factor . Term_prime
+
+    '*'  shift, and go to state 39
+    '/'  shift, and go to state 40
+
+    $default  reduce using rule 24 (Term_prime)
+
+    Term_prime  go to state 62
+
+
+state 56
+
+   26 Factor_prime: 'e' B . Factor_prime
+
+    'e'  shift, and go to state 42
+
+    $default  reduce using rule 27 (Factor_prime)
+
+    Factor_prime  go to state 63
+
+
+state 57
+
+   15 Assignment: 'm' '[' Exp ']' '=' . Exp
+
+    'n'  shift, and go to state 14
+    'm'  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    Exp     go to state 64
+    Term    go to state 18
+    Factor  go to state 19
+    B       go to state 20
+
+
+state 58
+
+   29 B: 'm' '[' Exp ']' .
+
+    $default  reduce using rule 29 (B)
+
+
+state 59
+
+   18 Exp_prime: '+' Term Exp_prime .
+
+    $default  reduce using rule 18 (Exp_prime)
+
+
+state 60
+
+   19 Exp_prime: '-' Term Exp_prime .
+
+    $default  reduce using rule 19 (Exp_prime)
+
+
+state 61
+
+   22 Term_prime: '*' Factor Term_prime .
+
+    $default  reduce using rule 22 (Term_prime)
+
+
+state 62
+
+   23 Term_prime: '/' Factor Term_prime .
+
+    $default  reduce using rule 23 (Term_prime)
+
+
+state 63
+
+   26 Factor_prime: 'e' B Factor_prime .
+
+    $default  reduce using rule 26 (Factor_prime)
+
+
+state 64
+
+   15 Assignment: 'm' '[' Exp ']' '=' Exp .
+
+    $default  reduce using rule 15 (Assignment)

@@ -1,0 +1,8 @@
+(1) Scanner
+For the scanner, I implemented a simple if/else if/else to match character(s) to symbols. I parsed the text line by line to retain line numbers. Two queues were set up, one storing line numbers for scanner and parser use, and the other storing string representations of T_num for parser use.
+
+(2) Grammar modification
+First, I changed to grammer to respect precedence of operators, and make the operators left associative for +,-,*,/ and right associative for **. Then, I realized that LL(1) parsers could not parse left-recursive grammers, so I modified the grammar be functionally equivalent to the original one but non-left-recursive. This grammar was tested in calc_def.{l|y} before implementing in scanner_t.
+
+(3) Parser
+For the parser, I implemented each non-terminal. However, I encountered problems when implementing C-code emission of the exponential operator and the goto keyword. In both cases, previous lines of C code had to be modified when certain tokens were encountered in the future. For example, if T_if was encountered after parsing T_goto T_num, the C code line 'goto [num]' would have to be wrapped in an if statement. I decided to resolve this issue by not placing C code directly in cerr but a buffer, so that modifications could be made before the buffer was emitted.

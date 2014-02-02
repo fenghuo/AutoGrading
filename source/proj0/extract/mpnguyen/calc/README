@@ -1,0 +1,24 @@
+I did a lot o_O
+
+No real problems.  Just a lot of tedious work.
+It took me a very long time to debug some of the logic.
+
+I basically started with a simple scanner that would read in 
+input from standard input and spit out what kind of string it
+encountered.  I was worried about white space separated operators.
+
+I was having trouble handling outputing expressions out to stdout 
+in the c program but I decided to use escaped to fprintf to stderr 
+with embedded printf with embedded escaped characters. It was bad.
+
+I'm worried I didn't handle divisions properly because they
+generate floats but its all ints afterwards.
+
+Outputting was a pain with char* so I refactored to use string
+but that was another issue.  My biggest issue with this was the 
+combination of using standard cstrings and char*.  The other
+issue I was having was formating numbers properly or organizing
+strings properly into the c statement.
+
+Testing outputs was also hard because I had to capture both
+the error stream and standard output.

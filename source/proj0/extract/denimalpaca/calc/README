@@ -1,0 +1,37 @@
+//This is Benji's README file - Hunter Laux is my code buddy
+//I believe we use almost identical recursive power functions when writing to stderr and our grammar
+//may be very similar
+
+Heres's quick outline of how my program works:
+
+We start by calling the parse() function, which takes us to Start and then to Statements.
+Statements reads a line from the file using getchar and stores it in a buffer. The scanner class
+is responsible for both the buffer and the bufptr. Every call to nexttoken eats white space and 
+uses bufptr to determine the type of token. Statements calls to Statement, and when Statement returns,
+Statements puts an EOF token in the linked list. It's used for me so I can tell when the line ends 
+when I translate it into C.
+
+Statement can call Assignment, Jump, Print, or Label, and each of those can call several different
+functions or eat_token(). Eat_token calls the scanner version of eat_token, which processes the
+input, then sends it to add_to_list(). Add_to_list() takes a token input and adds it to the linked
+list of struct type toke_list which holds a next pointer, integer value, and token type. When a T_num
+isn't going in the struct, the int value is -1, out of the range of use. Only ints ever use that 
+field and it is changed before added to the linked list.
+
+When the recursive descent parsing is complete, Statements adds an EOF token to the linked list 
+because one is not added by any other parts of the parser. Instead, the parts of the parser look for
+it as a sign to immediately break and recurse back up. Statements then makes a call to write_c() which
+then loops through the linked list and generates C code. I won't go in to the details of my write_c()
+loop, but it's pretty straightfoward in that it prints a recursive power function, stdio.h and a main
+program. It either writes directly to stderr or calls another write function.
+
+I believe that that outlines the major functions used in my code. I had no problems running my program
+with the test.good.calc file and then compiling the C code. The C program ran on CSIL, as well. I also
+tested for the power function and something like (5 - 4) ** 3 which produces power( (5-4), 3), as it
+should.
+
+The only issue I ran into is checking to see if a number is greater than 2^31-1, as my scanner returns
+a scan error before an out of range error before the number is even checked for a range error. I check
+to make sure there aren't negative values being inputted by checking to see if a '0 - ' comes before
+any num. I don't check other values because subtraction is allowed, and just a minus sign before a 
+num should return a scan error already.

@@ -1,0 +1,105 @@
+Name: Daniel Vicory
+Perm #: 7024755
+
+Scanner:
+The scanner was implemented to be as simple as possible. next_token() will determine the token
+type using the first character as guidance, and then eat up as many characters as that tokens
+is and verify them (for instance, the print token consists of only the characters "print"). My scanner
+also supports more advanced number parsing for edge cases (any number of leading zeroes will be fine,
+as well as making sure that it is not larger 2^32 - 1 in a more robust way). After the token is
+determined, it is stored. eat_token() verifies that the token stored is the same as the passed token.
+
+Grammar:
+I began with the example grammar provided, including the grammar from slide 11 of week 2's slides.
+I added power, making sure precedence was correct. The grammar was made to have no left recursion
+and also used left factoring to make it LL(1). It was tested with bison for ambiguity, and then the
+first and follow sets were done for work on the parser.
+
+Parser:
+The parser was easily written using the grammar's rules, first sets, and follow sets.
+Errors will be detected immediately if a token is encountered that is not in the follow set.
+The scanner notices newline characters and increments a line counter, which the parser
+will use in the event of an error.
+
+C code generation:
+The C code generation is done in the simplest way possible. All non-terminals below Statement
+take in a string and return a string. Some non-terminals simply append to the string for the
+equivalent C code. In the instance of goto if statements and powers, it becomes more complex.
+Since it is not known if a goto will become a goto if in advance, or if any expression will be
+raised to a power, temporary strings are passed into the responsible non-terminals. Higher level
+non-terminals will check if that token comes up after they are done recursing, if they do, it inserts
+the proper if statement (in the case of goto if) or wraps around the powf() C function call for powers.
+This was the trickiest part of the assignment and was not immediately obvious, but once figured out
+became clear and turned out to be very robust. Statement then simply takes in the built string,
+outputs it to cerr and appends a semicolon. parse() wraps all this with C includes, main function,
+and integer array, m. All powf() calls have their arguments and return values casted to an integer,
+since our program only works with integers and may have issues if a powf() is returned to a printf()
+with the %d modifier.
+
+The only serious issue I ran into was the code given to us included creating the edges to make a tree.
+However, the code outputs a semicolon (see parsetree_t::pop()) at the very end, which causes a syntax
+error for the dot utility. I removed this semicolon so that dot can be ran and PDFs can be generated.
+
+My code buddy is Maria Polyakova.
+
+The grammar is as follows:
+
+Start         : Statement Statements
+              ;
+
+Statements    : Statement Statements
+              |
+              ;
+
+Statement     : Label
+              | Jump
+              | Assignment
+              | Print
+              ;
+
+Label         : 'l' 'n' ':'
+              ;
+
+Jump          : 'g' GotoZ
+              ;
+
+GotoZ         : 'n' NumZ
+              ;
+
+NumZ          : 'i' Expression
+              |
+              ;
+
+Assignment    : 'm' '[' Expression ']' '=' Expression
+              ;
+
+Print         : 'p' Expression
+              ;
+
+Expression    : Term ExpressionP
+              ;
+
+ExpressionP   : '+' Term ExpressionP
+              | '-' Term ExpressionP
+              |
+              ;
+
+Term          : Factor TermP
+              ;
+
+TermP         : '*' Power TermP
+              | '/' Power TermP
+              |
+              ;
+
+Factor        : Power PowerP
+              ;
+
+PowerP        : 'e' Factor
+              |
+              ;
+
+Power         : '(' Expression ')'
+              | 'm' '[' Expression ']'
+              | 'n'
+              ;

@@ -1,0 +1,1 @@
+L num : m [ num ] = num - ( m [ num ] - num ) m [ num ] = num / num * num m [ num ] = num + m [ num ] m [ num ] = num - m [ num - num ] m [ num ] = num - ( num - num ) m [ num ] = num - m [ ( num - num ) ] print m [ num ] goto num if m [ num ] print m [ num ] goto num print m [ num ] L num : print m [ num ] eof 

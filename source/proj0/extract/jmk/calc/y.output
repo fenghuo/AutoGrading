@@ -1,0 +1,683 @@
+Grammar
+
+    0 $accept: Start $end
+
+    1 Start: Statements
+
+    2 Statements: Statement MoreStatement
+
+    3 MoreStatement: Statement MoreStatement
+    4              | epsilon
+
+    5 Statement: Label
+    6          | Jump
+    7          | Assignment
+    8          | Print
+
+    9 Label: 'l' 'n' ':'
+
+   10 Jump: 'g' 'n'
+   11     | 'g' 'n' 'i' Expression
+
+   12 Assignment: 'm' '[' Expression ']' '=' Expression
+
+   13 Print: 'p' Expression
+
+   14 Expression: Term ExpressionP
+
+   15 ExpressionP: '+' Term ExpressionP
+   16            | '-' Term ExpressionP
+   17            | epsilon
+
+   18 Term: Factor TermP
+
+   19 TermP: '*' Factor TermP
+   20      | '/' Factor TermP
+   21      | epsilon
+
+   22 Factor: Exp FactorP
+
+   23 FactorP: 'e' Exp FactorP
+   24        | epsilon
+
+   25 Exp: '(' Expression ')'
+   26    | 'm' '[' Expression ']'
+   27    | 'n'
+
+   28 epsilon: /* empty */
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 25
+')' (41) 25
+'*' (42) 19
+'+' (43) 15
+'-' (45) 16
+'/' (47) 20
+':' (58) 9
+'=' (61) 12
+'[' (91) 12 26
+']' (93) 12 26
+'e' (101) 23
+'g' (103) 10 11
+'i' (105) 11
+'l' (108) 9
+'m' (109) 12 26
+'n' (110) 9 10 11 27
+'p' (112) 13
+error (256)
+
+
+Nonterminals, with rules where they appear
+
+$accept (20)
+    on left: 0
+Start (21)
+    on left: 1, on right: 0
+Statements (22)
+    on left: 2, on right: 1
+MoreStatement (23)
+    on left: 3 4, on right: 2 3
+Statement (24)
+    on left: 5 6 7 8, on right: 2 3
+Label (25)
+    on left: 9, on right: 5
+Jump (26)
+    on left: 10 11, on right: 6
+Assignment (27)
+    on left: 12, on right: 7
+Print (28)
+    on left: 13, on right: 8
+Expression (29)
+    on left: 14, on right: 11 12 13 25 26
+ExpressionP (30)
+    on left: 15 16 17, on right: 14 15 16
+Term (31)
+    on left: 18, on right: 14 15 16
+TermP (32)
+    on left: 19 20 21, on right: 18 19 20
+Factor (33)
+    on left: 22, on right: 18 19 20
+FactorP (34)
+    on left: 23 24, on right: 22 23
+Exp (35)
+    on left: 25 26 27, on right: 22 23
+epsilon (36)
+    on left: 28, on right: 4 17 21 24
+
+
+state 0
+
+    0 $accept: . Start $end
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    Start       go to state 5
+    Statements  go to state 6
+    Statement   go to state 7
+    Label       go to state 8
+    Jump        go to state 9
+    Assignment  go to state 10
+    Print       go to state 11
+
+
+state 1
+
+    9 Label: 'l' . 'n' ':'
+
+    'n'  shift, and go to state 12
+
+
+state 2
+
+   10 Jump: 'g' . 'n'
+   11     | 'g' . 'n' 'i' Expression
+
+    'n'  shift, and go to state 13
+
+
+state 3
+
+   12 Assignment: 'm' . '[' Expression ']' '=' Expression
+
+    '['  shift, and go to state 14
+
+
+state 4
+
+   13 Print: 'p' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 18
+    Term        go to state 19
+    Factor      go to state 20
+    Exp         go to state 21
+
+
+state 5
+
+    0 $accept: Start . $end
+
+    $end  shift, and go to state 22
+
+
+state 6
+
+    1 Start: Statements .
+
+    $default  reduce using rule 1 (Start)
+
+
+state 7
+
+    2 Statements: Statement . MoreStatement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 28 (epsilon)
+
+    MoreStatement  go to state 23
+    Statement      go to state 24
+    Label          go to state 8
+    Jump           go to state 9
+    Assignment     go to state 10
+    Print          go to state 11
+    epsilon        go to state 25
+
+
+state 8
+
+    5 Statement: Label .
+
+    $default  reduce using rule 5 (Statement)
+
+
+state 9
+
+    6 Statement: Jump .
+
+    $default  reduce using rule 6 (Statement)
+
+
+state 10
+
+    7 Statement: Assignment .
+
+    $default  reduce using rule 7 (Statement)
+
+
+state 11
+
+    8 Statement: Print .
+
+    $default  reduce using rule 8 (Statement)
+
+
+state 12
+
+    9 Label: 'l' 'n' . ':'
+
+    ':'  shift, and go to state 26
+
+
+state 13
+
+   10 Jump: 'g' 'n' .
+   11     | 'g' 'n' . 'i' Expression
+
+    'i'  shift, and go to state 27
+
+    $default  reduce using rule 10 (Jump)
+
+
+state 14
+
+   12 Assignment: 'm' '[' . Expression ']' '=' Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 28
+    Term        go to state 19
+    Factor      go to state 20
+    Exp         go to state 21
+
+
+state 15
+
+   27 Exp: 'n' .
+
+    $default  reduce using rule 27 (Exp)
+
+
+state 16
+
+   26 Exp: 'm' . '[' Expression ']'
+
+    '['  shift, and go to state 29
+
+
+state 17
+
+   25 Exp: '(' . Expression ')'
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 30
+    Term        go to state 19
+    Factor      go to state 20
+    Exp         go to state 21
+
+
+state 18
+
+   13 Print: 'p' Expression .
+
+    $default  reduce using rule 13 (Print)
+
+
+state 19
+
+   14 Expression: Term . ExpressionP
+
+    '+'  shift, and go to state 31
+    '-'  shift, and go to state 32
+
+    $default  reduce using rule 28 (epsilon)
+
+    ExpressionP  go to state 33
+    epsilon      go to state 34
+
+
+state 20
+
+   18 Term: Factor . TermP
+
+    '*'  shift, and go to state 35
+    '/'  shift, and go to state 36
+
+    $default  reduce using rule 28 (epsilon)
+
+    TermP    go to state 37
+    epsilon  go to state 38
+
+
+state 21
+
+   22 Factor: Exp . FactorP
+
+    'e'  shift, and go to state 39
+
+    $default  reduce using rule 28 (epsilon)
+
+    FactorP  go to state 40
+    epsilon  go to state 41
+
+
+state 22
+
+    0 $accept: Start $end .
+
+    $default  accept
+
+
+state 23
+
+    2 Statements: Statement MoreStatement .
+
+    $default  reduce using rule 2 (Statements)
+
+
+state 24
+
+    3 MoreStatement: Statement . MoreStatement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 28 (epsilon)
+
+    MoreStatement  go to state 42
+    Statement      go to state 24
+    Label          go to state 8
+    Jump           go to state 9
+    Assignment     go to state 10
+    Print          go to state 11
+    epsilon        go to state 25
+
+
+state 25
+
+    4 MoreStatement: epsilon .
+
+    $default  reduce using rule 4 (MoreStatement)
+
+
+state 26
+
+    9 Label: 'l' 'n' ':' .
+
+    $default  reduce using rule 9 (Label)
+
+
+state 27
+
+   11 Jump: 'g' 'n' 'i' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 43
+    Term        go to state 19
+    Factor      go to state 20
+    Exp         go to state 21
+
+
+state 28
+
+   12 Assignment: 'm' '[' Expression . ']' '=' Expression
+
+    ']'  shift, and go to state 44
+
+
+state 29
+
+   26 Exp: 'm' '[' . Expression ']'
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 45
+    Term        go to state 19
+    Factor      go to state 20
+    Exp         go to state 21
+
+
+state 30
+
+   25 Exp: '(' Expression . ')'
+
+    ')'  shift, and go to state 46
+
+
+state 31
+
+   15 ExpressionP: '+' . Term ExpressionP
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Term    go to state 47
+    Factor  go to state 20
+    Exp     go to state 21
+
+
+state 32
+
+   16 ExpressionP: '-' . Term ExpressionP
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Term    go to state 48
+    Factor  go to state 20
+    Exp     go to state 21
+
+
+state 33
+
+   14 Expression: Term ExpressionP .
+
+    $default  reduce using rule 14 (Expression)
+
+
+state 34
+
+   17 ExpressionP: epsilon .
+
+    $default  reduce using rule 17 (ExpressionP)
+
+
+state 35
+
+   19 TermP: '*' . Factor TermP
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Factor  go to state 49
+    Exp     go to state 21
+
+
+state 36
+
+   20 TermP: '/' . Factor TermP
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Factor  go to state 50
+    Exp     go to state 21
+
+
+state 37
+
+   18 Term: Factor TermP .
+
+    $default  reduce using rule 18 (Term)
+
+
+state 38
+
+   21 TermP: epsilon .
+
+    $default  reduce using rule 21 (TermP)
+
+
+state 39
+
+   23 FactorP: 'e' . Exp FactorP
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Exp  go to state 51
+
+
+state 40
+
+   22 Factor: Exp FactorP .
+
+    $default  reduce using rule 22 (Factor)
+
+
+state 41
+
+   24 FactorP: epsilon .
+
+    $default  reduce using rule 24 (FactorP)
+
+
+state 42
+
+    3 MoreStatement: Statement MoreStatement .
+
+    $default  reduce using rule 3 (MoreStatement)
+
+
+state 43
+
+   11 Jump: 'g' 'n' 'i' Expression .
+
+    $default  reduce using rule 11 (Jump)
+
+
+state 44
+
+   12 Assignment: 'm' '[' Expression ']' . '=' Expression
+
+    '='  shift, and go to state 52
+
+
+state 45
+
+   26 Exp: 'm' '[' Expression . ']'
+
+    ']'  shift, and go to state 53
+
+
+state 46
+
+   25 Exp: '(' Expression ')' .
+
+    $default  reduce using rule 25 (Exp)
+
+
+state 47
+
+   15 ExpressionP: '+' Term . ExpressionP
+
+    '+'  shift, and go to state 31
+    '-'  shift, and go to state 32
+
+    $default  reduce using rule 28 (epsilon)
+
+    ExpressionP  go to state 54
+    epsilon      go to state 34
+
+
+state 48
+
+   16 ExpressionP: '-' Term . ExpressionP
+
+    '+'  shift, and go to state 31
+    '-'  shift, and go to state 32
+
+    $default  reduce using rule 28 (epsilon)
+
+    ExpressionP  go to state 55
+    epsilon      go to state 34
+
+
+state 49
+
+   19 TermP: '*' Factor . TermP
+
+    '*'  shift, and go to state 35
+    '/'  shift, and go to state 36
+
+    $default  reduce using rule 28 (epsilon)
+
+    TermP    go to state 56
+    epsilon  go to state 38
+
+
+state 50
+
+   20 TermP: '/' Factor . TermP
+
+    '*'  shift, and go to state 35
+    '/'  shift, and go to state 36
+
+    $default  reduce using rule 28 (epsilon)
+
+    TermP    go to state 57
+    epsilon  go to state 38
+
+
+state 51
+
+   23 FactorP: 'e' Exp . FactorP
+
+    'e'  shift, and go to state 39
+
+    $default  reduce using rule 28 (epsilon)
+
+    FactorP  go to state 58
+    epsilon  go to state 41
+
+
+state 52
+
+   12 Assignment: 'm' '[' Expression ']' '=' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 59
+    Term        go to state 19
+    Factor      go to state 20
+    Exp         go to state 21
+
+
+state 53
+
+   26 Exp: 'm' '[' Expression ']' .
+
+    $default  reduce using rule 26 (Exp)
+
+
+state 54
+
+   15 ExpressionP: '+' Term ExpressionP .
+
+    $default  reduce using rule 15 (ExpressionP)
+
+
+state 55
+
+   16 ExpressionP: '-' Term ExpressionP .
+
+    $default  reduce using rule 16 (ExpressionP)
+
+
+state 56
+
+   19 TermP: '*' Factor TermP .
+
+    $default  reduce using rule 19 (TermP)
+
+
+state 57
+
+   20 TermP: '/' Factor TermP .
+
+    $default  reduce using rule 20 (TermP)
+
+
+state 58
+
+   23 FactorP: 'e' Exp FactorP .
+
+    $default  reduce using rule 23 (FactorP)
+
+
+state 59
+
+   12 Assignment: 'm' '[' Expression ']' '=' Expression .
+
+    $default  reduce using rule 12 (Assignment)

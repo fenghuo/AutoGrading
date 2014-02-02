@@ -1,0 +1,6 @@
+Nivedh Mudaliar
+
+My approach was to use an array that held all the characters of the current line being scanned. In the parser I had recursive descent non terminal functions. Each function recursively calls the next, so the higher precedence operations (such as exponentiation) are at at the bottom so they are first to be read. Also in each non terminal function I emit c code.
+
+Most of the difficulties I encoutered were in modifying the grammar so that it was LL(1). I also had trouble calculating the follow sets of non terminals where epsilon could possibly be derived. This led to many errors, but I also learned a lot in regards to first and follow sets. 
+Another challenge I had was in emitting the C code. In C, If statements come before goto. However in our grammar they come after, so I needed a way to get the number token from the scanner.

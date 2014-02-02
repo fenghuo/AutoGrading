@@ -1,0 +1,53 @@
+Tyler Hekman
+5752837
+CS160 W2014
+Project 0
+
+I used getchar to read in characters from input, and placed them in a vector, then I cycled through the vector and grouped the characters into tokens.  I am very confident in my scanner, and I believe it generates a proper token stream given proper input, as well as throwing the proper errors (with the right line numbers) in the event of improper input.
+
+My parser will detect all errors, at least those presented in the test.bad.calc file.  I ran it against the test.bad.calc, fixing each error it caught, until test.bad.calc was in proper form.  My parse trees generate properly for test.good.calc, and this is what I used for testing throughout the project.
+
+However, as I tested my program more rigorously today (before I started C-code generation) I attempted to generate the parse tree for test.bad.calc, and noticed that it was malformed.  I investigated it for the remaining time I had, but I can not find out what's going wrong.  
+
+If I input:
+
+m[0] = 2*2
+m[0] = 2*3
+m[0] = 5 * (4 + 6)
+m[3] = 2
+m[4] = 2
+
+, the tree will be very deformed, clearly not having been parsed correctly.
+
+I tried rigorously to try to identify the pattern causing the problem, but I was unable to find or successfully recreate the bug at will.  In short, I have no idea what's causing the error, and can not fix it as a result.  The above code will supposably parse incorrectly, but all variations of it that I tried make a perfect parse tree.
+
+m[0] = 2*2 
+m[0] = 2*3
+m[0] = 5 * (4 + 6)
+m[3] = 2
+
+::
+
+m[3] = 2
+m[4] = 3
+
+::
+
+m[0] = 2*2
+m[4] = 2
+
+::
+
+m[0] = 5 * (4 + 6)
+m[4] = 2
+
+::
+
+m[0] = 4 * (4 + 6)
+m[4] = 2
+m[3] = 3
+
+
+All of these examples generate a perfect parse tree.  Again, I do not understand what is causing this problem, and I'm unable to isolate it.
+
+C-code generation is started yet incomplete.

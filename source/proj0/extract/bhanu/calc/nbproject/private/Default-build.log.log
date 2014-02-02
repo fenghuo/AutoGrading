@@ -1,0 +1,12 @@
+bison -d -rsolved -y  calc_def.y
+conflicts: 25 shift/reduce
+gcc -c y.tab.c
+flex calc_def.l
+gcc -c lex.yy.c
+gcc lex.yy.o y.tab.o -o calc_def
+g++ -c calc.cpp
+calc.cpp:164:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+1 warning generated.
+g++ calc.o -o calc

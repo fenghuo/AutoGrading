@@ -1,0 +1,9 @@
+Jeremy White
+
+I wrote the scanner by using the cin.peek() function to look ahead at the input and then the getchar() function in the eat_token function of the scanner.
+
+ I then modified my grammar by tweeking the precedence to be correct for common order of operations and making the exponent right associative. Then I took out all left recursion and ambiguity to make the grammar LL(1). I checked by making the grammar with bison and seeing no shit/reduce warnings.
+
+For the parser I made functions for each nonterminal in the grammar. In each one I checked to make sure that the correct tokens from the first sets for each nonterminal were showing up otherwise threw the syntax_error. If there were no errors I would call the functions based on the grammar. I tested my parser on the sample input and studied the parse tree and it seemed to match my grammar properly. 
+
+I was unable to figure out exactly how to emit the correct c code to stderr, so that part of my project is missing.

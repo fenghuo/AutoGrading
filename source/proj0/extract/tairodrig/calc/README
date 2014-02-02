@@ -1,0 +1,26 @@
+Tai Rodrig
+PROJECT 0
+
+
+My coding buddy for this project is Trevor Frese
+
+
+SCANNER:
+
+
+I decided to make the scanner use a queue of characters instead of an array because it is easier for me to conceptualize. The queue buffer keeps max(25,chars left) chars in it and both next_token and eat_token operate on the queue.
+
+In order to implement next_token, I look at the head of the character queue. If I see something obvious like a plus, minus, equals, etc, I just immediately return that token. If I see something that is longer than one char, I have to make sure that the rest of the chars are what I am expecting. For print, goto, and if, I made a recursive function that checks that each subsequent char is what we're expecting, given the first char. If I see a * I check the next char, if there's another star I return T_power otherwise I return T_times. For numbers, I recursively check that the next char is also a number, and I count how many chars there are and store it in a variable in the scanner, so that I know how many chars to eat when I have to eat the number. When I read in EOF, I return T_eof.
+ 
+To implement eat_token, I simply pop the appropriate number of chars from the queue (depending on the token). To eat a T_num, I check how long it is by referring to the variable I set up in next_token. As I pop the chars, I also push new ones onto the queue (until I read in T_eof)
+
+
+PARSER:
+
+After making the grammar LL(1), the rest was pretty easy. My parser is just a straight implementation of the grammar.
+However, the C code generation turned out to be tricky because of the power operator. The way I had it set up before allowed for 6 ** 5, but since I printed out the parsetree as I went along, I printed out a num before I even knew I was supposed to print "pow(" before it.
+To overcome this problem I made a stack of strings, and every time I get to the part in the grammar that allows for the power operator, I push on a new layer. Then, if it's a base of a power operation, I can insert "pow" before it. When the grammar pops back, I append the topmost layer to the layer underneath it and pop the topmost layer.
+This way, I can nest the power functions correctly so that 1**2**3 = pow(1,pow(2,3))
+The rest of the C code generation was trivial.
+
+Overall I really enjoyed this assignment and I feel like I learned a lot from it.

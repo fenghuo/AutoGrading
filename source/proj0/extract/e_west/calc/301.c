@@ -1,0 +1,1 @@
+m [ num ] = num / num * num m [ num ] = num * num - num - num - num / num print m [ num ] print m [ num ] print m [ num ] print m [ num ] eof 

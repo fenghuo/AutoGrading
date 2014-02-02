@@ -1,0 +1,51 @@
+Shervin Shaikh
+5074901
+
+Project 0
+1/22/14
+
+-- Scanner
+When initialized I read from stdin (using getline) and place every token into a vector of strings. I also place the token type into a separate vector.  I check to make sure statements like 'print', 'goto', 'if', and '**' are accounted for if not through a scan error.  When I encounter a number and while I continue to encounter more numbers, I convert this string and make sure it is smaller than 2147483647.  If so, enter the value as a string into my vector and store T_num in the other vector.  I also increment my line count each time I call getline.  Whenever I encounter a character that is not part of the grammer I throw a scan error.  The scanner seems to work as it should from my testing, because the next_token returns the token type being pointed at and eat_token increments the pointer to go to the next value in the vector.
+
+-- Parser
+I planned to have a grammer that followed C heirarchy when it came to operators, so I placed '+' and '-' at the bottom, followed by '*' and '/', then '**'(^), then '()', '[]', 'm[]'.  Assignments, prints, labels, and jumps were above all of these operators to make sure they had precedence. After calculationg the First & Follow I was able to see that this language is unambiguous and we finally know which operators have precedence over the others.
+My Grammer:
+Start -> S'
+
+S' -> S' S
+	| S
+
+S -> L
+  |  J
+  |  A
+  |  P
+
+L -> "L" number ":"
+
+Jump -> "goto" number
+      | "goto" number "if" Expression
+
+Assignment -> "m" "[" Expression "]" "=" Expression
+
+Print -> "print" Expression
+
+Expression -> Expression
+			| "m" "[" M "]"
+			| "(" M ")"
+			| M
+
+M -> M
+   | H
+   | H "**" H
+
+H -> H
+   | F "*" F
+   | F "/" F
+   | F
+
+F -> F
+   | K "+" K
+   | K "-" K
+   | num
+
+Sadly, I couldn't get the parser fully working with my grammer :(

@@ -1,0 +1,607 @@
+Grammar
+
+    0 $accept: Start $end
+
+    1 Start: Statements
+
+    2 Statements: Statement Statements
+    3           | ' '
+
+    4 Statement: Label
+    5          | Jump
+    6          | Assignment
+    7          | Print
+
+    8 Label: 'l' 'n' ':'
+
+    9 Jump: 'g' 'n'
+   10     | 'g' 'n' 'i' Expression
+
+   11 Assignment: 'm' '[' Expression ']' '=' Expression
+
+   12 Print: 'p' Expression
+
+   13 Expression: Term Expr
+
+   14 Expr: '+' Term Expr
+   15     | '-' Term Expr
+   16     | ' '
+
+   17 Term: Factor Ter
+
+   18 Ter: '*' Factor Ter
+   19    | '/' Factor Ter
+   20    | ' '
+
+   21 Factor: Number 'e' Expression
+   22       | Number
+
+   23 Number: '(' Expression ')'
+   24       | 'm' '[' Expression ']'
+   25       | 'n'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+' ' (32) 3 16 20
+'(' (40) 23
+')' (41) 23
+'*' (42) 18
+'+' (43) 14
+'-' (45) 15
+'/' (47) 19
+':' (58) 8
+'=' (61) 11
+'[' (91) 11 24
+']' (93) 11 24
+'e' (101) 21
+'g' (103) 9 10
+'i' (105) 10
+'l' (108) 8
+'m' (109) 11 24
+'n' (110) 8 9 10 25
+'p' (112) 12
+error (256)
+
+
+Nonterminals, with rules where they appear
+
+$accept (21)
+    on left: 0
+Start (22)
+    on left: 1, on right: 0
+Statements (23)
+    on left: 2 3, on right: 1 2
+Statement (24)
+    on left: 4 5 6 7, on right: 2
+Label (25)
+    on left: 8, on right: 4
+Jump (26)
+    on left: 9 10, on right: 5
+Assignment (27)
+    on left: 11, on right: 6
+Print (28)
+    on left: 12, on right: 7
+Expression (29)
+    on left: 13, on right: 10 11 12 21 23 24
+Expr (30)
+    on left: 14 15 16, on right: 13 14 15
+Term (31)
+    on left: 17, on right: 13 14 15
+Ter (32)
+    on left: 18 19 20, on right: 17 18 19
+Factor (33)
+    on left: 21 22, on right: 17 18 19
+Number (34)
+    on left: 23 24 25, on right: 21 22
+
+
+state 0
+
+    0 $accept: . Start $end
+
+    ' '  shift, and go to state 1
+    'l'  shift, and go to state 2
+    'g'  shift, and go to state 3
+    'm'  shift, and go to state 4
+    'p'  shift, and go to state 5
+
+    Start       go to state 6
+    Statements  go to state 7
+    Statement   go to state 8
+    Label       go to state 9
+    Jump        go to state 10
+    Assignment  go to state 11
+    Print       go to state 12
+
+
+state 1
+
+    3 Statements: ' ' .
+
+    $default  reduce using rule 3 (Statements)
+
+
+state 2
+
+    8 Label: 'l' . 'n' ':'
+
+    'n'  shift, and go to state 13
+
+
+state 3
+
+    9 Jump: 'g' . 'n'
+   10     | 'g' . 'n' 'i' Expression
+
+    'n'  shift, and go to state 14
+
+
+state 4
+
+   11 Assignment: 'm' . '[' Expression ']' '=' Expression
+
+    '['  shift, and go to state 15
+
+
+state 5
+
+   12 Print: 'p' . Expression
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Expression  go to state 19
+    Term        go to state 20
+    Factor      go to state 21
+    Number      go to state 22
+
+
+state 6
+
+    0 $accept: Start . $end
+
+    $end  shift, and go to state 23
+
+
+state 7
+
+    1 Start: Statements .
+
+    $default  reduce using rule 1 (Start)
+
+
+state 8
+
+    2 Statements: Statement . Statements
+
+    ' '  shift, and go to state 1
+    'l'  shift, and go to state 2
+    'g'  shift, and go to state 3
+    'm'  shift, and go to state 4
+    'p'  shift, and go to state 5
+
+    Statements  go to state 24
+    Statement   go to state 8
+    Label       go to state 9
+    Jump        go to state 10
+    Assignment  go to state 11
+    Print       go to state 12
+
+
+state 9
+
+    4 Statement: Label .
+
+    $default  reduce using rule 4 (Statement)
+
+
+state 10
+
+    5 Statement: Jump .
+
+    $default  reduce using rule 5 (Statement)
+
+
+state 11
+
+    6 Statement: Assignment .
+
+    $default  reduce using rule 6 (Statement)
+
+
+state 12
+
+    7 Statement: Print .
+
+    $default  reduce using rule 7 (Statement)
+
+
+state 13
+
+    8 Label: 'l' 'n' . ':'
+
+    ':'  shift, and go to state 25
+
+
+state 14
+
+    9 Jump: 'g' 'n' .
+   10     | 'g' 'n' . 'i' Expression
+
+    'i'  shift, and go to state 26
+
+    $default  reduce using rule 9 (Jump)
+
+
+state 15
+
+   11 Assignment: 'm' '[' . Expression ']' '=' Expression
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Expression  go to state 27
+    Term        go to state 20
+    Factor      go to state 21
+    Number      go to state 22
+
+
+state 16
+
+   25 Number: 'n' .
+
+    $default  reduce using rule 25 (Number)
+
+
+state 17
+
+   24 Number: 'm' . '[' Expression ']'
+
+    '['  shift, and go to state 28
+
+
+state 18
+
+   23 Number: '(' . Expression ')'
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Expression  go to state 29
+    Term        go to state 20
+    Factor      go to state 21
+    Number      go to state 22
+
+
+state 19
+
+   12 Print: 'p' Expression .
+
+    $default  reduce using rule 12 (Print)
+
+
+state 20
+
+   13 Expression: Term . Expr
+
+    ' '  shift, and go to state 30
+    '+'  shift, and go to state 31
+    '-'  shift, and go to state 32
+
+    Expr  go to state 33
+
+
+state 21
+
+   17 Term: Factor . Ter
+
+    ' '  shift, and go to state 34
+    '*'  shift, and go to state 35
+    '/'  shift, and go to state 36
+
+    Ter  go to state 37
+
+
+state 22
+
+   21 Factor: Number . 'e' Expression
+   22       | Number .
+
+    'e'  shift, and go to state 38
+
+    $default  reduce using rule 22 (Factor)
+
+
+state 23
+
+    0 $accept: Start $end .
+
+    $default  accept
+
+
+state 24
+
+    2 Statements: Statement Statements .
+
+    $default  reduce using rule 2 (Statements)
+
+
+state 25
+
+    8 Label: 'l' 'n' ':' .
+
+    $default  reduce using rule 8 (Label)
+
+
+state 26
+
+   10 Jump: 'g' 'n' 'i' . Expression
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Expression  go to state 39
+    Term        go to state 20
+    Factor      go to state 21
+    Number      go to state 22
+
+
+state 27
+
+   11 Assignment: 'm' '[' Expression . ']' '=' Expression
+
+    ']'  shift, and go to state 40
+
+
+state 28
+
+   24 Number: 'm' '[' . Expression ']'
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Expression  go to state 41
+    Term        go to state 20
+    Factor      go to state 21
+    Number      go to state 22
+
+
+state 29
+
+   23 Number: '(' Expression . ')'
+
+    ')'  shift, and go to state 42
+
+
+state 30
+
+   16 Expr: ' ' .
+
+    $default  reduce using rule 16 (Expr)
+
+
+state 31
+
+   14 Expr: '+' . Term Expr
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Term    go to state 43
+    Factor  go to state 21
+    Number  go to state 22
+
+
+state 32
+
+   15 Expr: '-' . Term Expr
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Term    go to state 44
+    Factor  go to state 21
+    Number  go to state 22
+
+
+state 33
+
+   13 Expression: Term Expr .
+
+    $default  reduce using rule 13 (Expression)
+
+
+state 34
+
+   20 Ter: ' ' .
+
+    $default  reduce using rule 20 (Ter)
+
+
+state 35
+
+   18 Ter: '*' . Factor Ter
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Factor  go to state 45
+    Number  go to state 22
+
+
+state 36
+
+   19 Ter: '/' . Factor Ter
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Factor  go to state 46
+    Number  go to state 22
+
+
+state 37
+
+   17 Term: Factor Ter .
+
+    $default  reduce using rule 17 (Term)
+
+
+state 38
+
+   21 Factor: Number 'e' . Expression
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Expression  go to state 47
+    Term        go to state 20
+    Factor      go to state 21
+    Number      go to state 22
+
+
+state 39
+
+   10 Jump: 'g' 'n' 'i' Expression .
+
+    $default  reduce using rule 10 (Jump)
+
+
+state 40
+
+   11 Assignment: 'm' '[' Expression ']' . '=' Expression
+
+    '='  shift, and go to state 48
+
+
+state 41
+
+   24 Number: 'm' '[' Expression . ']'
+
+    ']'  shift, and go to state 49
+
+
+state 42
+
+   23 Number: '(' Expression ')' .
+
+    $default  reduce using rule 23 (Number)
+
+
+state 43
+
+   14 Expr: '+' Term . Expr
+
+    ' '  shift, and go to state 30
+    '+'  shift, and go to state 31
+    '-'  shift, and go to state 32
+
+    Expr  go to state 50
+
+
+state 44
+
+   15 Expr: '-' Term . Expr
+
+    ' '  shift, and go to state 30
+    '+'  shift, and go to state 31
+    '-'  shift, and go to state 32
+
+    Expr  go to state 51
+
+
+state 45
+
+   18 Ter: '*' Factor . Ter
+
+    ' '  shift, and go to state 34
+    '*'  shift, and go to state 35
+    '/'  shift, and go to state 36
+
+    Ter  go to state 52
+
+
+state 46
+
+   19 Ter: '/' Factor . Ter
+
+    ' '  shift, and go to state 34
+    '*'  shift, and go to state 35
+    '/'  shift, and go to state 36
+
+    Ter  go to state 53
+
+
+state 47
+
+   21 Factor: Number 'e' Expression .
+
+    $default  reduce using rule 21 (Factor)
+
+
+state 48
+
+   11 Assignment: 'm' '[' Expression ']' '=' . Expression
+
+    'n'  shift, and go to state 16
+    'm'  shift, and go to state 17
+    '('  shift, and go to state 18
+
+    Expression  go to state 54
+    Term        go to state 20
+    Factor      go to state 21
+    Number      go to state 22
+
+
+state 49
+
+   24 Number: 'm' '[' Expression ']' .
+
+    $default  reduce using rule 24 (Number)
+
+
+state 50
+
+   14 Expr: '+' Term Expr .
+
+    $default  reduce using rule 14 (Expr)
+
+
+state 51
+
+   15 Expr: '-' Term Expr .
+
+    $default  reduce using rule 15 (Expr)
+
+
+state 52
+
+   18 Ter: '*' Factor Ter .
+
+    $default  reduce using rule 18 (Ter)
+
+
+state 53
+
+   19 Ter: '/' Factor Ter .
+
+    $default  reduce using rule 19 (Ter)
+
+
+state 54
+
+   11 Assignment: 'm' '[' Expression ']' '=' Expression .
+
+    $default  reduce using rule 11 (Assignment)

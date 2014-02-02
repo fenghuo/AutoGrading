@@ -1,0 +1,16 @@
+README - Alex Wood
+
+My approach (see comments for more details):
+
+- Use an array and index for scanner for easy checking ahead (for print, goto, num, etc)
+- Introduce recursive descent non-terminals Term and Value to grammar to create precedence. Each recursively calls the next, so the higher precedence operations are toward the bottom and are the first to read a token
+- Lowest level, Value, can descend further with '(' and '[' by recursively calling expression as well as perform exponent
+- Emit C code in each non-term function
+
+Difficulties:
+
+- Emitting C code:
+	- If statements in c come before goto, but in this language come after, so I had to implement an accessor method for scanner to save num tokens for later retrieval
+	- The pow() operation is also a different order (** num num), so I needed to modify the grammar slightly to parse and emit C code correctly
+- Writing the Scanner:
+	- I originally used a malloced array of chars but started getting some corrupt memory errors when parsing many lines, so I staticly allocated it instead

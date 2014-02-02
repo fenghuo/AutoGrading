@@ -1,0 +1,239 @@
+Nonterminals useless in grammar
+
+   Assignment
+   Print
+   Expression
+   Term
+   Factor
+   Args
+
+
+Terminals unused in grammar
+
+   'i'
+   'm'
+   '['
+   ']'
+   '='
+   'p'
+   '+'
+   '-'
+   '*'
+   '/'
+   'e'
+   '('
+   ')'
+
+
+Rules useless in grammar
+
+    9 Statement: Assignment
+   10          | Print
+
+   11 Jump: 'g' 'n' 'i' Expression
+
+   12 Assignment: 'm' '[' Expression ']' '=' Expression
+
+   13 Print: 'p' Expression
+
+   14 Expression: Expression '+' Expression
+   15           | Expression '-' Expression
+
+   16 Term: Expression '*' Expression
+   17     | Expression '/' Expression
+   18     | Expression 'e' Expression
+
+   19 Factor: '(' Expression ')'
+   20       | 'm' Args
+   21       | 'n'
+
+   22 Args: '[' Expression ']'
+   23     | /* empty */
+
+
+Grammar
+
+    0 $accept: Start $end
+
+    1 Start: Statements
+
+    2 Statements: Statement X
+
+    3 X: Statement X
+    4  | /* empty */
+
+    5 Statement: Label
+    6          | Jump
+
+    7 Label: 'l' 'n' ':'
+
+    8 Jump: 'g' 'n'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40)
+')' (41)
+'*' (42)
+'+' (43)
+'-' (45)
+'/' (47)
+':' (58) 7
+'=' (61)
+'[' (91)
+']' (93)
+'e' (101)
+'g' (103) 8
+'i' (105)
+'l' (108) 7
+'m' (109)
+'n' (110) 7 8
+'p' (112)
+error (256)
+
+
+Nonterminals, with rules where they appear
+
+$accept (20)
+    on left: 0
+Start (21)
+    on left: 1, on right: 0
+Statements (22)
+    on left: 2, on right: 1
+X (23)
+    on left: 3 4, on right: 2 3
+Statement (24)
+    on left: 5 6, on right: 2 3
+Label (25)
+    on left: 7, on right: 5
+Jump (26)
+    on left: 8, on right: 6
+
+
+state 0
+
+    0 $accept: . Start $end
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+
+    Start       go to state 3
+    Statements  go to state 4
+    Statement   go to state 5
+    Label       go to state 6
+    Jump        go to state 7
+
+
+state 1
+
+    7 Label: 'l' . 'n' ':'
+
+    'n'  shift, and go to state 8
+
+
+state 2
+
+    8 Jump: 'g' . 'n'
+
+    'n'  shift, and go to state 9
+
+
+state 3
+
+    0 $accept: Start . $end
+
+    $end  shift, and go to state 10
+
+
+state 4
+
+    1 Start: Statements .
+
+    $default  reduce using rule 1 (Start)
+
+
+state 5
+
+    2 Statements: Statement . X
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+
+    $default  reduce using rule 4 (X)
+
+    X          go to state 11
+    Statement  go to state 12
+    Label      go to state 6
+    Jump       go to state 7
+
+
+state 6
+
+    5 Statement: Label .
+
+    $default  reduce using rule 5 (Statement)
+
+
+state 7
+
+    6 Statement: Jump .
+
+    $default  reduce using rule 6 (Statement)
+
+
+state 8
+
+    7 Label: 'l' 'n' . ':'
+
+    ':'  shift, and go to state 13
+
+
+state 9
+
+    8 Jump: 'g' 'n' .
+
+    $default  reduce using rule 8 (Jump)
+
+
+state 10
+
+    0 $accept: Start $end .
+
+    $default  accept
+
+
+state 11
+
+    2 Statements: Statement X .
+
+    $default  reduce using rule 2 (Statements)
+
+
+state 12
+
+    3 X: Statement . X
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+
+    $default  reduce using rule 4 (X)
+
+    X          go to state 14
+    Statement  go to state 12
+    Label      go to state 6
+    Jump       go to state 7
+
+
+state 13
+
+    7 Label: 'l' 'n' ':' .
+
+    $default  reduce using rule 7 (Label)
+
+
+state 14
+
+    3 X: Statement X .
+
+    $default  reduce using rule 3 (X)

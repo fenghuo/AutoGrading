@@ -1,0 +1,9 @@
+I created a recursive decent parser c++ and after I was all finished I wrote the lex and bison to verify it.
+
+I used getc and ungetc to read and write to standard in one character at a time. I defined a macro code_printf which is called for all the generated C code.
+
+I created a function C function for the generated code that is called for the exponential. The parser takes the num ** num syntax and converts it into intPow(num,num). When reading the LL(1) syntax I could simply put 1 as the 2nd argument if ** was not found. Unfortunately this generates ugly looking code, but is easy to implement.
+
+To generate a C file run make test_app.
+
+Benji Lampel was my partner.

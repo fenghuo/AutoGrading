@@ -1,0 +1,599 @@
+State 35 conflicts: 5 shift/reduce
+State 36 conflicts: 5 shift/reduce
+State 37 conflicts: 5 shift/reduce
+State 38 conflicts: 5 shift/reduce
+State 39 conflicts: 5 shift/reduce
+
+
+Grammar
+
+    0 $accept: Start $end
+
+    1 Start: Statements
+
+    2 Statements: Statements Statement
+    3           | Statement
+
+    4 Statement: Label
+    5          | Jump
+    6          | Assignment
+    7          | Print
+
+    8 Label: 'l' 'n' ':'
+
+    9 Jump: 'g' 'n'
+   10     | 'g' 'n' 'i' Expression
+
+   11 Assignment: 'm' '[' Expression ']' '=' Expression
+
+   12 Print: 'p' Expression
+
+   13 Expression: Expression '+' Expression
+   14           | Expression '-' Expression
+   15           | Expression '*' Expression
+   16           | Expression '/' Expression
+   17           | Expression 'e' Expression
+   18           | '(' Expression ')'
+   19           | 'm' '[' Expression ']'
+   20           | 'n'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 18
+')' (41) 18
+'*' (42) 15
+'+' (43) 13
+'-' (45) 14
+'/' (47) 16
+':' (58) 8
+'=' (61) 11
+'[' (91) 11 19
+']' (93) 11 19
+'e' (101) 17
+'g' (103) 9 10
+'i' (105) 10
+'l' (108) 8
+'m' (109) 11 19
+'n' (110) 8 9 10 20
+'p' (112) 12
+error (256)
+
+
+Nonterminals, with rules where they appear
+
+$accept (20)
+    on left: 0
+Start (21)
+    on left: 1, on right: 0
+Statements (22)
+    on left: 2 3, on right: 1 2
+Statement (23)
+    on left: 4 5 6 7, on right: 2 3
+Label (24)
+    on left: 8, on right: 4
+Jump (25)
+    on left: 9 10, on right: 5
+Assignment (26)
+    on left: 11, on right: 6
+Print (27)
+    on left: 12, on right: 7
+Expression (28)
+    on left: 13 14 15 16 17 18 19 20, on right: 10 11 12 13 14 15 16
+    17 18 19
+
+
+state 0
+
+    0 $accept: . Start $end
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    Start       go to state 5
+    Statements  go to state 6
+    Statement   go to state 7
+    Label       go to state 8
+    Jump        go to state 9
+    Assignment  go to state 10
+    Print       go to state 11
+
+
+state 1
+
+    8 Label: 'l' . 'n' ':'
+
+    'n'  shift, and go to state 12
+
+
+state 2
+
+    9 Jump: 'g' . 'n'
+   10     | 'g' . 'n' 'i' Expression
+
+    'n'  shift, and go to state 13
+
+
+state 3
+
+   11 Assignment: 'm' . '[' Expression ']' '=' Expression
+
+    '['  shift, and go to state 14
+
+
+state 4
+
+   12 Print: 'p' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 18
+
+
+state 5
+
+    0 $accept: Start . $end
+
+    $end  shift, and go to state 19
+
+
+state 6
+
+    1 Start: Statements .
+    2 Statements: Statements . Statement
+
+    'l'  shift, and go to state 1
+    'g'  shift, and go to state 2
+    'm'  shift, and go to state 3
+    'p'  shift, and go to state 4
+
+    $default  reduce using rule 1 (Start)
+
+    Statement   go to state 20
+    Label       go to state 8
+    Jump        go to state 9
+    Assignment  go to state 10
+    Print       go to state 11
+
+
+state 7
+
+    3 Statements: Statement .
+
+    $default  reduce using rule 3 (Statements)
+
+
+state 8
+
+    4 Statement: Label .
+
+    $default  reduce using rule 4 (Statement)
+
+
+state 9
+
+    5 Statement: Jump .
+
+    $default  reduce using rule 5 (Statement)
+
+
+state 10
+
+    6 Statement: Assignment .
+
+    $default  reduce using rule 6 (Statement)
+
+
+state 11
+
+    7 Statement: Print .
+
+    $default  reduce using rule 7 (Statement)
+
+
+state 12
+
+    8 Label: 'l' 'n' . ':'
+
+    ':'  shift, and go to state 21
+
+
+state 13
+
+    9 Jump: 'g' 'n' .
+   10     | 'g' 'n' . 'i' Expression
+
+    'i'  shift, and go to state 22
+
+    $default  reduce using rule 9 (Jump)
+
+
+state 14
+
+   11 Assignment: 'm' '[' . Expression ']' '=' Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 23
+
+
+state 15
+
+   20 Expression: 'n' .
+
+    $default  reduce using rule 20 (Expression)
+
+
+state 16
+
+   19 Expression: 'm' . '[' Expression ']'
+
+    '['  shift, and go to state 24
+
+
+state 17
+
+   18 Expression: '(' . Expression ')'
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 25
+
+
+state 18
+
+   12 Print: 'p' Expression .
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    $default  reduce using rule 12 (Print)
+
+
+state 19
+
+    0 $accept: Start $end .
+
+    $default  accept
+
+
+state 20
+
+    2 Statements: Statements Statement .
+
+    $default  reduce using rule 2 (Statements)
+
+
+state 21
+
+    8 Label: 'l' 'n' ':' .
+
+    $default  reduce using rule 8 (Label)
+
+
+state 22
+
+   10 Jump: 'g' 'n' 'i' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 31
+
+
+state 23
+
+   11 Assignment: 'm' '[' Expression . ']' '=' Expression
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+
+    ']'  shift, and go to state 32
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+
+state 24
+
+   19 Expression: 'm' '[' . Expression ']'
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 33
+
+
+state 25
+
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+   18           | '(' Expression . ')'
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+    ')'  shift, and go to state 34
+
+
+state 26
+
+   13 Expression: Expression '+' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 35
+
+
+state 27
+
+   14 Expression: Expression '-' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 36
+
+
+state 28
+
+   15 Expression: Expression '*' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 37
+
+
+state 29
+
+   16 Expression: Expression '/' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 38
+
+
+state 30
+
+   17 Expression: Expression 'e' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 39
+
+
+state 31
+
+   10 Jump: 'g' 'n' 'i' Expression .
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    $default  reduce using rule 10 (Jump)
+
+
+state 32
+
+   11 Assignment: 'm' '[' Expression ']' . '=' Expression
+
+    '='  shift, and go to state 40
+
+
+state 33
+
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+   19           | 'm' '[' Expression . ']'
+
+    ']'  shift, and go to state 41
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+
+state 34
+
+   18 Expression: '(' Expression ')' .
+
+    $default  reduce using rule 18 (Expression)
+
+
+state 35
+
+   13 Expression: Expression . '+' Expression
+   13           | Expression '+' Expression .
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    '+'       [reduce using rule 13 (Expression)]
+    '-'       [reduce using rule 13 (Expression)]
+    '*'       [reduce using rule 13 (Expression)]
+    '/'       [reduce using rule 13 (Expression)]
+    'e'       [reduce using rule 13 (Expression)]
+    $default  reduce using rule 13 (Expression)
+
+
+state 36
+
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   14           | Expression '-' Expression .
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    '+'       [reduce using rule 14 (Expression)]
+    '-'       [reduce using rule 14 (Expression)]
+    '*'       [reduce using rule 14 (Expression)]
+    '/'       [reduce using rule 14 (Expression)]
+    'e'       [reduce using rule 14 (Expression)]
+    $default  reduce using rule 14 (Expression)
+
+
+state 37
+
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   15           | Expression '*' Expression .
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    '+'       [reduce using rule 15 (Expression)]
+    '-'       [reduce using rule 15 (Expression)]
+    '*'       [reduce using rule 15 (Expression)]
+    '/'       [reduce using rule 15 (Expression)]
+    'e'       [reduce using rule 15 (Expression)]
+    $default  reduce using rule 15 (Expression)
+
+
+state 38
+
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   16           | Expression '/' Expression .
+   17           | Expression . 'e' Expression
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    '+'       [reduce using rule 16 (Expression)]
+    '-'       [reduce using rule 16 (Expression)]
+    '*'       [reduce using rule 16 (Expression)]
+    '/'       [reduce using rule 16 (Expression)]
+    'e'       [reduce using rule 16 (Expression)]
+    $default  reduce using rule 16 (Expression)
+
+
+state 39
+
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+   17           | Expression 'e' Expression .
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    '+'       [reduce using rule 17 (Expression)]
+    '-'       [reduce using rule 17 (Expression)]
+    '*'       [reduce using rule 17 (Expression)]
+    '/'       [reduce using rule 17 (Expression)]
+    'e'       [reduce using rule 17 (Expression)]
+    $default  reduce using rule 17 (Expression)
+
+
+state 40
+
+   11 Assignment: 'm' '[' Expression ']' '=' . Expression
+
+    'n'  shift, and go to state 15
+    'm'  shift, and go to state 16
+    '('  shift, and go to state 17
+
+    Expression  go to state 42
+
+
+state 41
+
+   19 Expression: 'm' '[' Expression ']' .
+
+    $default  reduce using rule 19 (Expression)
+
+
+state 42
+
+   11 Assignment: 'm' '[' Expression ']' '=' Expression .
+   13 Expression: Expression . '+' Expression
+   14           | Expression . '-' Expression
+   15           | Expression . '*' Expression
+   16           | Expression . '/' Expression
+   17           | Expression . 'e' Expression
+
+    '+'  shift, and go to state 26
+    '-'  shift, and go to state 27
+    '*'  shift, and go to state 28
+    '/'  shift, and go to state 29
+    'e'  shift, and go to state 30
+
+    $default  reduce using rule 11 (Assignment)

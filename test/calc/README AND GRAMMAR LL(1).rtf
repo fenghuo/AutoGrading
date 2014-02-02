@@ -1,0 +1,22 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Tahoma;}
+{\colortbl;\red255\green255\blue255;\red67\green67\blue67;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 I had a lot of trouble with this project. I wasn't sure how to format things and I got lost. People who I asked for help weren't getting very far either.\
+\
+Converting the grammar to LL(1):\
+\cb1 \
+There is ambiguity at Jump. It never goes to the second option: 
+\f1\fs26 \cf2 "goto" number "if" 
+\b Expression.\
+\
+
+\b0\fs24 It must be changed to Jump' with that second option.\
+\
+Also, for expression, it has to split up the Expression "+" Expression AND it does not follow PEMDAS. Power should be first, then multiplication/division, then addition/subtraction.\
+\
+
+\b\fs26 \
+}

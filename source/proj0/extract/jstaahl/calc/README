@@ -1,0 +1,7 @@
+Jakob Staahl
+
+I was able to get the entire project working. Each step is fully implemented.
+
+I did have some trouble with figuring out how to print the exponents to C code.  Eventually I figured out a bit of a hack: When entering the recursive exponent rule (which can evaluate to epsilon), I always start off with "(int)pow(". Then if it turns out to recurse back to the exponent rule, I complete the pow function call by evaluating its exponent expression; otherwise, I close the functoin call with ", 1)" (simply raise the number to the first power).
+
+So, my C code may be a bit inefficient, but it works.
