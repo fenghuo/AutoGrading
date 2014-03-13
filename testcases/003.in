@@ -1,7 +1,27 @@
-m[60] = m[60] - 1
-m[0] = 5 / 2 * 3
-m[4] = 9999999999999992 + 2
-m[0] = 5 - (m[4] - 6)
-m[0] = m[5] / 2 * 3
-m[0] = 2 + m[2]
-m[0] = 5 - m[4 - 6]
+Program 
+{
+	var4 : Bool;
+	var5 : Int;
+
+	start() : Nothing
+	{
+		var1 : Int;
+		var2 : Int;
+		var1 = 512;
+		var5 = 1024;
+		print var5/var1;
+		var5 = end();
+		return;
+	};
+
+	end() : Int
+	{
+		var1 : Int;
+		var2 : Int;
+		var1 = 512;
+		var5 = 1024;
+		print var5/var1;
+		var2 = var5/var1;	
+		return var2;
+	};
+};

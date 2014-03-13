@@ -154,4 +154,22 @@ digraph G {
 	"Term76" -> "Factor77"
 	"NumParen78" [label="NumParen"]
 	"Factor77" -> "NumParen78"
-syntax error: found eof in parsing NumParen - line 2
+	"num79" [label="num",style=filled,fillcolor=powderblue]
+	"NumParen78" -> "num79"
+	"Start80" [label="Start"]
+	"Factor77" -> "Start80"
+	"e81" [label="e"]
+	"Start80" -> "e81"
+	"TMultDiv82" [label="TMultDiv"]
+	"Term76" -> "TMultDiv82"
+	"e83" [label="e"]
+	"TMultDiv82" -> "e83"
+	"EAddSub84" [label="EAddSub"]
+	"EAddSub74" -> "EAddSub84"
+	"e85" [label="e"]
+	"EAddSub84" -> "e85"
+	"Statements86" [label="Statements"]
+	"Statements46" -> "Statements86"
+	"e87" [label="e"]
+	"Statements86" -> "e87"
+};

@@ -638,21 +638,21 @@ void parser_t::Statement()
 void parser_t::Label()
 {
     parsetree.push(NT_Label);
-    scanner.eat_token(T_label);
-    scanner.eat_token(T_num);
+    eat_token(T_label);
+    eat_token(T_num);
     fprintf(fileout, "\tl%i", scanner.get_number());
-    scanner.eat_token(T_colon);
+    eat_token(T_colon);
     fprintf(fileout, ":\n");
     parsetree.pop();
 }
 void parser_t::Jump()
 {
     parsetree.push(NT_Jump);
-    scanner.eat_token(T_goto);
-    scanner.eat_token(T_num);
+    eat_token(T_goto);
+    eat_token(T_num);
     if(scanner.next_token()==T_if)
     {
-        scanner.eat_token(T_if);
+        eat_token(T_if);
         int i = scanner.get_number();
         fprintf(fileout, "\tif(");
         Expression();
@@ -666,12 +666,12 @@ void parser_t::Jump()
 void parser_t::Assignment()
 {
     parsetree.push(NT_Assignment);
-    scanner.eat_token(T_m);
-    scanner.eat_token(T_opensquare);
+    eat_token(T_m);
+    eat_token(T_opensquare);
     fprintf(fileout, "\tm[ addr = ( ");
     Expression();
-    scanner.eat_token(T_closesquare);
-    scanner.eat_token(T_equals);
+    eat_token(T_closesquare);
+    eat_token(T_equals);
     fprintf(fileout, ") ] = ");
     Expression();
     fprintf(fileout, ";\n");
@@ -680,7 +680,7 @@ void parser_t::Assignment()
 void parser_t::Print()
 {
     parsetree.push(NT_Print);
-    scanner.eat_token(T_print);
+    eat_token(T_print);
     fprintf(fileout, "\tprintf(");
     fputc('"', fileout);
     fputc('%', fileout);
@@ -714,12 +714,12 @@ void parser_t::Expr()
     switch(scanner.next_token())
     {
         case T_plus:
-            scanner.eat_token(T_plus);
+            eat_token(T_plus);
             fprintf(fileout, "+ ");
             Term(); Expr();
             break;
         case T_minus:
-            scanner.eat_token(T_minus);
+            eat_token(T_minus);
             fprintf(fileout, "- ");
             Term(); Expr();
             break;
@@ -750,12 +750,12 @@ void parser_t::Ter()
     switch(scanner.next_token())
     {
         case T_times:
-            scanner.eat_token(T_times);
+            eat_token(T_times);
             fprintf(fileout, "* ");
             Factor(); Ter();
             break;
         case T_divide:
-            scanner.eat_token(T_divide);
+            eat_token(T_divide);
             fprintf(fileout, "/ ");
             Factor(); Ter();
             break;
@@ -776,7 +776,7 @@ void parser_t::Factor()
             Number();
             if(scanner.next_token()==T_power)
             {
-                scanner.eat_token(T_power);
+                eat_token(T_power);
                 fprintf(fileout, "^ ( ");
                 Expression();
                 fprintf(fileout, ") ");
@@ -793,22 +793,22 @@ void parser_t::Number()
     switch(scanner.next_token())
     {
         case T_openparen:
-            scanner.eat_token(T_openparen);
+            eat_token(T_openparen);
             fprintf(fileout, "( ");
             Expression();
-            scanner.eat_token(T_closeparen);
+            eat_token(T_closeparen);
             fprintf(fileout, ") ");
             break;
         case T_num:
-            scanner.eat_token(T_num);
+            eat_token(T_num);
             fprintf(fileout, "%i ", scanner.get_number());
             break;
         case T_m:
-            scanner.eat_token(T_m);
-            scanner.eat_token(T_opensquare);
+            eat_token(T_m);
+            eat_token(T_opensquare);
             fprintf(fileout, "m[ addr = ( ");
             Expression();
-            scanner.eat_token(T_closesquare);
+            eat_token(T_closesquare);
             fprintf(fileout, ") ] ");
             break;
         default:

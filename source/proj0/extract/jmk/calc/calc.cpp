@@ -223,7 +223,7 @@ token_type scanner_t::next_token()
 
 				Num = atoi(numba.c_str());
 				if(Num >= 2147483648 || Num < 0){
-						range_error(numba);
+						//range_error(numba);
 					}
 
 			}//while
@@ -270,7 +270,7 @@ token_type scanner_t::next_token()
 		case T_num: return T_num;					// 1: numbers
 		case '+'  : return T_plus;				// 2: +
 		case '-'  : eat = getchar();
-					if(isdigit(cin.peek())) {
+					if(0 && isdigit(cin.peek())) {
 						range_error("-1");}
 					else{
 						cin.putback(eat);	
@@ -386,7 +386,7 @@ void scanner_t::eat_token(token_type c)
 				break;
 
 			case T_print:
-				cerr<<"printf(\"%f \",";
+				cerr<<"printf(\"%d \",";
 				getchar();
 				getchar();
 				getchar();
@@ -447,7 +447,7 @@ void scanner_t::mismatch_error (token_type x)
 void scanner_t::range_error(string x)
 {
 	//printf("range error: %lf is outside of alloted range -- line %d\n", x, get_line());
-	cout<<"range error: "<<x<< " is outside of alloted range -- line "<<get_line()<<endl;
+	cout<<"scan error: "<<x<< " is outside of alloted range -- line "<<get_line()<<endl;
 	exit(1);
 
 }

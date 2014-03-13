@@ -125,7 +125,7 @@ token_type scanner_t::read_token() {
     int len = buffer.length();
     char c  = buffer[pos];
 
-    while (c !=  EOF && pos < len-1) {
+    while (c !=  EOF && pos < len) {
         if (isdigit(c)) return tokenize_num();
         if (isalnum(c)) return tokenize_keyword();
 

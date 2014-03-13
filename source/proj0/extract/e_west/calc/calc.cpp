@@ -354,7 +354,7 @@ void scanner_t::eat_token(token_type c)
     case T_minus:
     case T_times:
     case T_divide:
-    case T_power:
+    //case T_power:
     case T_equals:
     case T_openparen:
     case T_closeparen:
@@ -366,6 +366,9 @@ void scanner_t::eat_token(token_type c)
       //one-character tokens, checks already been
       //performed in next_token, simply eat and return
       cin.get();
+      break;
+    case T_power:
+      cin.get(); cin.get();
       break;
     case T_goto:
       for(int i=0; i<4; ++i){
@@ -440,7 +443,7 @@ void scanner_t::mismatch_error (token_type x)
 
 void scanner_t::range_error ()
 {
-  printf("range error: found integer with value exceeding 2147483646 - line %d\n",
+  printf("scan error: found integer with value exceeding 2147483646 - line %d\n",
 	 get_line());
   exit(1);
 }

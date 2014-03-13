@@ -10,7 +10,7 @@ using namespace std;
 
 /*** Enums and Print Functions for Terminals and Non-Terminals  **********************/
 
-#define MAX_SYMBOL_NAME_SIZE 25
+#define MAX_SYMBOL_NAME_SIZE 50
 #define MAX_STRING_LEN 10
 #define NUM_OF_TOKES 18
 
@@ -313,6 +313,9 @@ void scanner_t::eat_token(token_type c)
 			case T_eof:
 				break;
 			case T_if:
+				bufptr = bufptr + 2;
+				break;
+			case T_power:
 				bufptr = bufptr + 2;
 				break;
 			default:

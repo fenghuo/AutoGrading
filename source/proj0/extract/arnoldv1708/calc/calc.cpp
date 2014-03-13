@@ -248,7 +248,7 @@ scanner_t::scanner_t()
                 if (s >= 0 && s!=pow(2,31)-1)
                     m.push_back(s);
                 else{
-                    printf("range error: number out of range -line %d\n", get_line()+1);
+                    printf("scan error: number out of range -line %d\n", get_line()+1);
                     exit(1);}
             }
             else{
@@ -274,7 +274,7 @@ scanner_t::scanner_t()
                     m.push_back(number);
                     numString="";}
                 else{
-                    printf("range error: number out of range -line %d\n", get_line()+1);
+                    printf("scan error: number out of range -line %d\n", get_line()+1);
                     exit(1);
                 }
             }

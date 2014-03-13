@@ -427,8 +427,8 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint8 yyrline[] =
 {
        0,     9,     9,    12,    13,    15,    16,    17,    18,    21,
-      24,    25,    28,    31,    35,    38,    39,    40,    43,    44,
-      47,    48,    49,    51,    55,    58,    59,    62,    63
+      24,    25,    28,    31,    35,    38,    39,    40,    44,    45,
+      48,    49,    50,    53,    57,    60,    61,    64,    65
 };
 #endif
 
@@ -1603,7 +1603,7 @@ yyreturn:
 
 
 /* Line 2048 of yacc.c  */
-#line 65 "calc_def.y"
+#line 68 "calc_def.y"
 
 
 void yyerror(char *s) {

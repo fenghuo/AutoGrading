@@ -1,1 +1,456 @@
+Read line m[0] = 5 / 2 * 3
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 1, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 1, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 1, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 1, i=3
+line[4]=" ", line[i..i+5]=" = 5 /"
+line[5]="=", line[i..i+5]="= 5 / "
+Parsed token = at line 1, i=5
+line[6]=" ", line[i..i+5]=" 5 / 2"
+line[7]="5", line[i..i+5]="5 / 2 "
+i=7, j=8, str=5
+Parsed token num at line 1, i=7
+line[8]=" ", line[i..i+5]=" / 2 *"
+line[9]="/", line[i..i+5]="/ 2 * "
+Parsed token / at line 1, i=9
+line[10]=" ", line[i..i+5]=" 2 * 3"
+line[11]="2", line[i..i+5]="2 * 3"
+i=11, j=12, str=2
+Parsed token num at line 1, i=11
+line[12]=" ", line[i..i+5]=" * 3"
+line[13]="*", line[i..i+5]="* 3"
+Parsed token * at line 1, i=13
+line[14]=" ", line[i..i+5]=" 3"
+line[15]="3", line[i..i+5]="3"
+i=15, j=16, str=3
+Parsed token num at line 1, i=15
+Read line m[4] = 88 + 2
+line[0]="m", line[i..i+5]="m[4] ="
+Parsed token m at line 2, i=0
+line[1]="[", line[i..i+5]="[4] = "
+Parsed token [ at line 2, i=1
+line[2]="4", line[i..i+5]="4] = 8"
+i=2, j=3, str=4
+Parsed token num at line 2, i=2
+line[3]="]", line[i..i+5]="] = 88"
+Parsed token ] at line 2, i=3
+line[4]=" ", line[i..i+5]=" = 88 "
+line[5]="=", line[i..i+5]="= 88 +"
+Parsed token = at line 2, i=5
+line[6]=" ", line[i..i+5]=" 88 + "
+line[7]="8", line[i..i+5]="88 + 2"
+i=7, j=9, str=88
+Parsed token num at line 2, i=8
+line[9]=" ", line[i..i+5]=" + 2"
+line[10]="+", line[i..i+5]="+ 2"
+Parsed token + at line 2, i=10
+line[11]=" ", line[i..i+5]=" 2"
+line[12]="2", line[i..i+5]="2"
+i=12, j=13, str=2
+Parsed token num at line 2, i=12
+Read line m[0] = 5 - (m[4] - 6)
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 3, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 3, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 3, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 3, i=3
+line[4]=" ", line[i..i+5]=" = 5 -"
+line[5]="=", line[i..i+5]="= 5 - "
+Parsed token = at line 3, i=5
+line[6]=" ", line[i..i+5]=" 5 - ("
+line[7]="5", line[i..i+5]="5 - (m"
+i=7, j=8, str=5
+Parsed token num at line 3, i=7
+line[8]=" ", line[i..i+5]=" - (m["
+line[9]="-", line[i..i+5]="- (m[4"
+Parsed token - at line 3, i=9
+line[10]=" ", line[i..i+5]=" (m[4]"
+line[11]="(", line[i..i+5]="(m[4] "
+Parsed token ( at line 3, i=11
+line[12]="m", line[i..i+5]="m[4] -"
+Parsed token m at line 3, i=12
+line[13]="[", line[i..i+5]="[4] - "
+Parsed token [ at line 3, i=13
+line[14]="4", line[i..i+5]="4] - 6"
+i=14, j=15, str=4
+Parsed token num at line 3, i=14
+line[15]="]", line[i..i+5]="] - 6)"
+Parsed token ] at line 3, i=15
+line[16]=" ", line[i..i+5]=" - 6)"
+line[17]="-", line[i..i+5]="- 6)"
+Parsed token - at line 3, i=17
+line[18]=" ", line[i..i+5]=" 6)"
+line[19]="6", line[i..i+5]="6)"
+i=19, j=20, str=6
+Parsed token num at line 3, i=19
+line[20]=")", line[i..i+5]=")"
+Parsed token ) at line 3, i=20
+Read line m[0] = 5 / 2 * 3
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 4, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 4, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 4, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 4, i=3
+line[4]=" ", line[i..i+5]=" = 5 /"
+line[5]="=", line[i..i+5]="= 5 / "
+Parsed token = at line 4, i=5
+line[6]=" ", line[i..i+5]=" 5 / 2"
+line[7]="5", line[i..i+5]="5 / 2 "
+i=7, j=8, str=5
+Parsed token num at line 4, i=7
+line[8]=" ", line[i..i+5]=" / 2 *"
+line[9]="/", line[i..i+5]="/ 2 * "
+Parsed token / at line 4, i=9
+line[10]=" ", line[i..i+5]=" 2 * 3"
+line[11]="2", line[i..i+5]="2 * 3"
+i=11, j=12, str=2
+Parsed token num at line 4, i=11
+line[12]=" ", line[i..i+5]=" * 3"
+line[13]="*", line[i..i+5]="* 3"
+Parsed token * at line 4, i=13
+line[14]=" ", line[i..i+5]=" 3"
+line[15]="3", line[i..i+5]="3"
+i=15, j=16, str=3
+Parsed token num at line 4, i=15
+Read line m[0] = 2 + m[2]
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 5, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 5, i=1
+line[2]="0", line[i..i+5]="0] = 2"
+i=2, j=3, str=0
+Parsed token num at line 5, i=2
+line[3]="]", line[i..i+5]="] = 2 "
+Parsed token ] at line 5, i=3
+line[4]=" ", line[i..i+5]=" = 2 +"
+line[5]="=", line[i..i+5]="= 2 + "
+Parsed token = at line 5, i=5
+line[6]=" ", line[i..i+5]=" 2 + m"
+line[7]="2", line[i..i+5]="2 + m["
+i=7, j=8, str=2
+Parsed token num at line 5, i=7
+line[8]=" ", line[i..i+5]=" + m[2"
+line[9]="+", line[i..i+5]="+ m[2]"
+Parsed token + at line 5, i=9
+line[10]=" ", line[i..i+5]=" m[2]"
+line[11]="m", line[i..i+5]="m[2]"
+Parsed token m at line 5, i=11
+line[12]="[", line[i..i+5]="[2]"
+Parsed token [ at line 5, i=12
+line[13]="2", line[i..i+5]="2]"
+i=13, j=14, str=2
+Parsed token num at line 5, i=13
+line[14]="]", line[i..i+5]="]"
+Parsed token ] at line 5, i=14
+Read line m[0] = 5 - m[4**4*2-2] - 6
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 6, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 6, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 6, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 6, i=3
+line[4]=" ", line[i..i+5]=" = 5 -"
+line[5]="=", line[i..i+5]="= 5 - "
+Parsed token = at line 6, i=5
+line[6]=" ", line[i..i+5]=" 5 - m"
+line[7]="5", line[i..i+5]="5 - m["
+i=7, j=8, str=5
+Parsed token num at line 6, i=7
+line[8]=" ", line[i..i+5]=" - m[4"
+line[9]="-", line[i..i+5]="- m[4*"
+Parsed token - at line 6, i=9
+line[10]=" ", line[i..i+5]=" m[4**"
+line[11]="m", line[i..i+5]="m[4**4"
+Parsed token m at line 6, i=11
+line[12]="[", line[i..i+5]="[4**4*"
+Parsed token [ at line 6, i=12
+line[13]="4", line[i..i+5]="4**4*2"
+i=13, j=14, str=4
+Parsed token num at line 6, i=13
+line[14]="*", line[i..i+5]="**4*2-"
+Parsed token ** at line 6, i=15
+line[16]="4", line[i..i+5]="4*2-2]"
+i=16, j=17, str=4
+Parsed token num at line 6, i=16
+line[17]="*", line[i..i+5]="*2-2] "
+Parsed token * at line 6, i=17
+line[18]="2", line[i..i+5]="2-2] -"
+i=18, j=19, str=2
+Parsed token num at line 6, i=18
+line[19]="-", line[i..i+5]="-2] - "
+Parsed token - at line 6, i=19
+line[20]="2", line[i..i+5]="2] - 6"
+i=20, j=21, str=2
+Parsed token num at line 6, i=20
+line[21]="]", line[i..i+5]="] - 6"
+Parsed token ] at line 6, i=21
+line[22]=" ", line[i..i+5]=" - 6"
+line[23]="-", line[i..i+5]="- 6"
+Parsed token - at line 6, i=23
+line[24]=" ", line[i..i+5]=" 6"
+line[25]="6", line[i..i+5]="6"
+i=25, j=26, str=6
+Parsed token num at line 6, i=25
+Read line L1:
+line[0]="L", line[i..i+5]="L1:"
+Parsed token L at line 7, i=0
+line[1]="1", line[i..i+5]="1:"
+i=1, j=2, str=1
+Parsed token num at line 7, i=1
+line[2]=":", line[i..i+5]=":"
+Parsed token : at line 7, i=2
+Read line m[0] = 5 - (m[4] - 6)
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 8, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 8, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 8, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 8, i=3
+line[4]=" ", line[i..i+5]=" = 5 -"
+line[5]="=", line[i..i+5]="= 5 - "
+Parsed token = at line 8, i=5
+line[6]=" ", line[i..i+5]=" 5 - ("
+line[7]="5", line[i..i+5]="5 - (m"
+i=7, j=8, str=5
+Parsed token num at line 8, i=7
+line[8]=" ", line[i..i+5]=" - (m["
+line[9]="-", line[i..i+5]="- (m[4"
+Parsed token - at line 8, i=9
+line[10]=" ", line[i..i+5]=" (m[4]"
+line[11]="(", line[i..i+5]="(m[4] "
+Parsed token ( at line 8, i=11
+line[12]="m", line[i..i+5]="m[4] -"
+Parsed token m at line 8, i=12
+line[13]="[", line[i..i+5]="[4] - "
+Parsed token [ at line 8, i=13
+line[14]="4", line[i..i+5]="4] - 6"
+i=14, j=15, str=4
+Parsed token num at line 8, i=14
+line[15]="]", line[i..i+5]="] - 6)"
+Parsed token ] at line 8, i=15
+line[16]=" ", line[i..i+5]=" - 6)"
+line[17]="-", line[i..i+5]="- 6)"
+Parsed token - at line 8, i=17
+line[18]=" ", line[i..i+5]=" 6)"
+line[19]="6", line[i..i+5]="6)"
+i=19, j=20, str=6
+Parsed token num at line 8, i=19
+line[20]=")", line[i..i+5]=")"
+Parsed token ) at line 8, i=20
+Read line m[0] = 5 / 2 * 3
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 9, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 9, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 9, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 9, i=3
+line[4]=" ", line[i..i+5]=" = 5 /"
+line[5]="=", line[i..i+5]="= 5 / "
+Parsed token = at line 9, i=5
+line[6]=" ", line[i..i+5]=" 5 / 2"
+line[7]="5", line[i..i+5]="5 / 2 "
+i=7, j=8, str=5
+Parsed token num at line 9, i=7
+line[8]=" ", line[i..i+5]=" / 2 *"
+line[9]="/", line[i..i+5]="/ 2 * "
+Parsed token / at line 9, i=9
+line[10]=" ", line[i..i+5]=" 2 * 3"
+line[11]="2", line[i..i+5]="2 * 3"
+i=11, j=12, str=2
+Parsed token num at line 9, i=11
+line[12]=" ", line[i..i+5]=" * 3"
+line[13]="*", line[i..i+5]="* 3"
+Parsed token * at line 9, i=13
+line[14]=" ", line[i..i+5]=" 3"
+line[15]="3", line[i..i+5]="3"
+i=15, j=16, str=3
+Parsed token num at line 9, i=15
+Read line m[0] = 2 + m[2]
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 10, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 10, i=1
+line[2]="0", line[i..i+5]="0] = 2"
+i=2, j=3, str=0
+Parsed token num at line 10, i=2
+line[3]="]", line[i..i+5]="] = 2 "
+Parsed token ] at line 10, i=3
+line[4]=" ", line[i..i+5]=" = 2 +"
+line[5]="=", line[i..i+5]="= 2 + "
+Parsed token = at line 10, i=5
+line[6]=" ", line[i..i+5]=" 2 + m"
+line[7]="2", line[i..i+5]="2 + m["
+i=7, j=8, str=2
+Parsed token num at line 10, i=7
+line[8]=" ", line[i..i+5]=" + m[2"
+line[9]="+", line[i..i+5]="+ m[2]"
+Parsed token + at line 10, i=9
+line[10]=" ", line[i..i+5]=" m[2]"
+line[11]="m", line[i..i+5]="m[2]"
+Parsed token m at line 10, i=11
+line[12]="[", line[i..i+5]="[2]"
+Parsed token [ at line 10, i=12
+line[13]="2", line[i..i+5]="2]"
+i=13, j=14, str=2
+Parsed token num at line 10, i=13
+line[14]="]", line[i..i+5]="]"
+Parsed token ] at line 10, i=14
+Read line m[0] = 5 - m[4 - 6]
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 11, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 11, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 11, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 11, i=3
+line[4]=" ", line[i..i+5]=" = 5 -"
+line[5]="=", line[i..i+5]="= 5 - "
+Parsed token = at line 11, i=5
+line[6]=" ", line[i..i+5]=" 5 - m"
+line[7]="5", line[i..i+5]="5 - m["
+i=7, j=8, str=5
+Parsed token num at line 11, i=7
+line[8]=" ", line[i..i+5]=" - m[4"
+line[9]="-", line[i..i+5]="- m[4 "
+Parsed token - at line 11, i=9
+line[10]=" ", line[i..i+5]=" m[4 -"
+line[11]="m", line[i..i+5]="m[4 - "
+Parsed token m at line 11, i=11
+line[12]="[", line[i..i+5]="[4 - 6"
+Parsed token [ at line 11, i=12
+line[13]="4", line[i..i+5]="4 - 6]"
+i=13, j=14, str=4
+Parsed token num at line 11, i=13
+line[14]=" ", line[i..i+5]=" - 6]"
+line[15]="-", line[i..i+5]="- 6]"
+Parsed token - at line 11, i=15
+line[16]=" ", line[i..i+5]=" 6]"
+line[17]="6", line[i..i+5]="6]"
+i=17, j=18, str=6
+Parsed token num at line 11, i=17
+line[18]="]", line[i..i+5]="]"
+Parsed token ] at line 11, i=18
+Read line m[3] = 5 - (4 - 6)
+line[0]="m", line[i..i+5]="m[3] ="
+Parsed token m at line 12, i=0
+line[1]="[", line[i..i+5]="[3] = "
+Parsed token [ at line 12, i=1
+line[2]="3", line[i..i+5]="3] = 5"
+i=2, j=3, str=3
+Parsed token num at line 12, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 12, i=3
+line[4]=" ", line[i..i+5]=" = 5 -"
+line[5]="=", line[i..i+5]="= 5 - "
+Parsed token = at line 12, i=5
+line[6]=" ", line[i..i+5]=" 5 - ("
+line[7]="5", line[i..i+5]="5 - (4"
+i=7, j=8, str=5
+Parsed token num at line 12, i=7
+line[8]=" ", line[i..i+5]=" - (4 "
+line[9]="-", line[i..i+5]="- (4 -"
+Parsed token - at line 12, i=9
+line[10]=" ", line[i..i+5]=" (4 - "
+line[11]="(", line[i..i+5]="(4 - 6"
+Parsed token ( at line 12, i=11
+line[12]="4", line[i..i+5]="4 - 6)"
+i=12, j=13, str=4
+Parsed token num at line 12, i=12
+line[13]=" ", line[i..i+5]=" - 6)"
+line[14]="-", line[i..i+5]="- 6)"
+Parsed token - at line 12, i=14
+line[15]=" ", line[i..i+5]=" 6)"
+line[16]="6", line[i..i+5]="6)"
+i=16, j=17, str=6
+Parsed token num at line 12, i=16
+line[17]=")", line[i..i+5]=")"
+Parsed token ) at line 12, i=17
+Read line m[2] = 5 - m[(6 - 4)]
+line[0]="m", line[i..i+5]="m[2] ="
+Parsed token m at line 13, i=0
+line[1]="[", line[i..i+5]="[2] = "
+Parsed token [ at line 13, i=1
+line[2]="2", line[i..i+5]="2] = 5"
+i=2, j=3, str=2
+Parsed token num at line 13, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 13, i=3
+line[4]=" ", line[i..i+5]=" = 5 -"
+line[5]="=", line[i..i+5]="= 5 - "
+Parsed token = at line 13, i=5
+line[6]=" ", line[i..i+5]=" 5 - m"
+line[7]="5", line[i..i+5]="5 - m["
+i=7, j=8, str=5
+Parsed token num at line 13, i=7
+line[8]=" ", line[i..i+5]=" - m[("
+line[9]="-", line[i..i+5]="- m[(6"
+Parsed token - at line 13, i=9
+line[10]=" ", line[i..i+5]=" m[(6 "
+line[11]="m", line[i..i+5]="m[(6 -"
+Parsed token m at line 13, i=11
+line[12]="[", line[i..i+5]="[(6 - "
+Parsed token [ at line 13, i=12
+line[13]="(", line[i..i+5]="(6 - 4"
+Parsed token ( at line 13, i=13
+line[14]="6", line[i..i+5]="6 - 4)"
+i=14, j=15, str=6
+Parsed token num at line 13, i=14
+line[15]=" ", line[i..i+5]=" - 4)]"
+line[16]="-", line[i..i+5]="- 4)]"
+Parsed token - at line 13, i=16
+line[17]=" ", line[i..i+5]=" 4)]"
+line[18]="4", line[i..i+5]="4)]"
+i=18, j=19, str=4
+Parsed token num at line 13, i=18
+line[19]=")", line[i..i+5]=")]"
+Parsed token ) at line 13, i=19
+line[20]="]", line[i..i+5]="]"
+Parsed token ] at line 13, i=20
+Read line print m[3]
+line[0]="p", line[i..i+5]="print "
+Parsed token print at line 14, i=4
+line[5]=" ", line[i..i+5]=" m[3]"
+line[6]="m", line[i..i+5]="m[3]"
+Parsed token m at line 14, i=6
+line[7]="[", line[i..i+5]="[3]"
+Parsed token [ at line 14, i=7
+line[8]="3", line[i..i+5]="3]"
+i=8, j=9, str=3
+Parsed token num at line 14, i=8
+line[9]="]", line[i..i+5]="]"
+Parsed token ] at line 14, i=9
+Read line goto 1 iff m[60]
+line[0]="g", line[i..i+5]="goto 1"
+Parsed token goto at line 15, i=3
+line[4]=" ", line[i..i+5]=" 1 iff"
+line[5]="1", line[i..i+5]="1 iff "
+i=5, j=6, str=1
+Parsed token num at line 15, i=5
+line[6]=" ", line[i..i+5]=" iff m"
+line[7]="i", line[i..i+5]="iff m["
+Character i failed to parse
 scan error: unrecognized character 'i' -line 1

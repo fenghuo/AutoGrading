@@ -192,13 +192,13 @@ scanner_t::scanner_t()
 	while (!cin.eof()) {
 		getline(cin, line);
 		// DEBUG
-		// cout << "Read line " << line << endl;
+		cout << "Read line " << line << endl;
 		this->current_line_number++;
 		int i = 0, length = line.length();
 		while (i < length) {
 			token_type token;
 			// DEBUG
-			// cout << "line["<<i<<"]=\""<<line[i]<<"\", line[i..i+5]=\""<<line.substr(i,6)<<"\"\n";
+			cout << "line["<<i<<"]=\""<<line[i]<<"\", line[i..i+5]=\""<<line.substr(i,6)<<"\"\n";
 			if ('0' <= line[i] && line[i] <= '9') {
 				// number
 				// Read in all digits after line[i]
@@ -207,7 +207,7 @@ scanner_t::scanner_t()
 				// Check whether the number is from 0 - 2**31-1
 				string number_str = line.substr(i, j-i);
 				// DEBUG
-				// cout << "i="<<i<<", j="<<j<<", str=" << number_str <<"\n";
+				cout << "i="<<i<<", j="<<j<<", str=" << number_str <<"\n";
 				errno = 0;
 				long int num = strtol(number_str.c_str(), NULL, 10);
 				if (errno == ERANGE || num < 0 || num > MAX_NUMBER) {
@@ -239,14 +239,14 @@ scanner_t::scanner_t()
 			else if (line[i] != ' ' && line[i] != '\t') {
 				// unknown token, report token
 				// DEBUG
-				// cout << "Character " << line[i] << " failed to parse\n";
+				cout << "Character " << line[i] << " failed to parse\n";
 				this->scan_error(line[i]);
 			}
 			if (line[i] != ' ' && line[i] != '\t') {
 				this->tokens.push(token);
 				this->line_numbers.push(this->current_line_number);
 				// DEBUG
-				// cout << "Parsed token " << token_to_string(token) << " at line " << this->current_line_number << ", i=" << i << endl;
+				cout << "Parsed token " << token_to_string(token) << " at line " << this->current_line_number << ", i=" << i << endl;
 			}
 			++i;
 		}
@@ -561,8 +561,14 @@ void parser_t::Label() {
 	parsetree.push(NT_Label);
 
 	scanner.eat_token(T_label);
+	parsetree.push(T_label);
+	parsetree.pop();
 	scanner.eat_token(T_num);
+	parsetree.push(T_num);
+	parsetree.pop();
 	scanner.eat_token(T_colon);
+	parsetree.push(T_colon);
+	parsetree.pop();
 	cerr_buffer.push_back("L" + scanner.get_number() + ":\n");
 
 	parsetree.pop();
@@ -572,10 +578,16 @@ void parser_t::Jump() {
 	parsetree.push(NT_Jump);
 
 	scanner.eat_token(T_goto);
+	parsetree.push(T_goto);
+	parsetree.pop();
 	scanner.eat_token(T_num);
+	parsetree.push(T_num);
+	parsetree.pop();
 	cerr_buffer.push_back("goto L" + scanner.get_number() + ";\n");
 	if (scanner.next_token() == T_if) {
 		scanner.eat_token(T_if);
+		parsetree.push(T_if);
+		parsetree.pop();
 		// Insert if statement before goto
 		string goto_str = cerr_buffer.back();
 		cerr_buffer.pop_back();
@@ -593,11 +605,19 @@ void parser_t::Assignment() {
 	parsetree.push(NT_Assignment);
 
 	scanner.eat_token(T_m);
+	parsetree.push(T_m);
+	parsetree.pop();
 	scanner.eat_token(T_opensquare);
+	parsetree.push(T_opensquare);
+	parsetree.pop();
 	cerr_buffer.push_back("m[");
 	Expression();
 	scanner.eat_token(T_closesquare);
+	parsetree.push(T_closesquare);
+	parsetree.pop();
 	scanner.eat_token(T_equals);
+	parsetree.push(T_equals);
+	parsetree.pop();
 	cerr_buffer.push_back("]=");
 	Expression();
 	cerr_buffer.push_back(";\n");
@@ -609,6 +629,8 @@ void parser_t::Print() {
 	parsetree.push(NT_Print);
 
 	scanner.eat_token(T_print);
+	parsetree.push(T_print);
+	parsetree.pop();
 	cerr_buffer.push_back("printf(\"%d\",");
 	Expression();
 	cerr_buffer.push_back(");\n");
@@ -631,12 +653,16 @@ void parser_t::ExpressionRight() {
 	switch (scanner.next_token()) {
 		case T_plus:
 			scanner.eat_token(T_plus);
+			parsetree.push(T_plus);
+			parsetree.pop();
 			cerr_buffer.push_back("+");
 			Term();
 			ExpressionRight();
 			break;
 		case T_minus:
 			scanner.eat_token(T_minus);
+			parsetree.push(T_minus);
+			parsetree.pop();
 			cerr_buffer.push_back("-");
 			Term();
 			ExpressionRight();
@@ -664,12 +690,16 @@ void parser_t::TermRight() {
 	switch (scanner.next_token()) {
 		case T_times:
 			scanner.eat_token(T_times);
+			parsetree.push(T_times);
+			parsetree.pop();
 			cerr_buffer.push_back("*");
 			ExponentialTerm();
 			TermRight();
 			break;
 		case T_divide:
 			scanner.eat_token(T_divide);
+			parsetree.push(T_divide);
+			parsetree.pop();
 			cerr_buffer.push_back("/");
 			ExponentialTerm();
 			TermRight();
@@ -689,6 +719,8 @@ void parser_t::ExponentialTerm() {
 	BracketTerm();
 	if (scanner.next_token() == T_power) {
 		scanner.eat_token(T_power);
+		parsetree.push(T_power);
+		parsetree.pop();
 		cerr_buffer.push_back(",");
 		ExponentialTerm();
 		cerr_buffer.push_back(")");
@@ -710,21 +742,33 @@ void parser_t::BracketTerm() {
 	switch (scanner.next_token()) {
 		case T_openparen:
 			scanner.eat_token(T_openparen);
+			parsetree.push(T_openparen);
+			parsetree.pop();
 			cerr_buffer.push_back("(");
 			Expression();
 			scanner.eat_token(T_closeparen);
+			parsetree.push(T_closeparen);
+			parsetree.pop();
 			cerr_buffer.push_back(")");
 			break;
 		case T_m:
 			scanner.eat_token(T_m);
+			parsetree.push(T_m);
+			parsetree.pop();
 			scanner.eat_token(T_opensquare);
+			parsetree.push(T_opensquare);
+			parsetree.pop();
 			cerr_buffer.push_back("m[");
 			Expression();
 			scanner.eat_token(T_closesquare);
+			parsetree.push(T_closesquare);
+			parsetree.pop();
 			cerr_buffer.push_back("]");
 			break;
 		case T_num:
 			scanner.eat_token(T_num);
+			parsetree.push(T_num);
+			parsetree.pop();
 			cerr_buffer.push_back(scanner.get_number());
 			break;
 		default:

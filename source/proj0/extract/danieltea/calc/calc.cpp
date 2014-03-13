@@ -18,7 +18,7 @@
 using namespace std;
 
 
-bool DEBUG = 0;
+bool DEBUG = 1;
 
 
 /*** Enums and Print Functions for Terminals and Non-Terminals  **********************/

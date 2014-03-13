@@ -1,1 +1,1 @@
-m [ num ] = num / num * num m [ num ] = num + m [ m [ num ] - m [ num ] + num ] m [ num ] = num - m [ num ** * num - num + num ] - num print m [ num ] print m [ num ] print m [ num ] eof 
+m [ num ] = num / num * num m [ num ] = num + m [ m [ num ] - m [ num ] + num ] m [ num ] = num - m [ num ** num - num + num ] - num print m [ num ] print m [ num ] print m [ num ] eof 

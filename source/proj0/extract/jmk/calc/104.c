@@ -8,17 +8,17 @@ int m[101];
 
 m[ 3 ]  = 5 -  ( 4 - 6 ) ; 
 m[ 2 ]  = 5 - m[  ( 6 - 4 )  ]; 
-printf("%f ",m[ 3 ]);
+printf("%d ",m[ 3 ]);
 
  if( m[ 60 ] );
 goto L1; 
-printf("%f ",m[ 2 ]);
+printf("%d ",m[ 2 ]);
 
 goto L2; 
-printf("%f ",m[ 0 ]);
+printf("%d ",m[ 0 ]);
 
 L2:
-printf("%f ",m[ 0 ]);
+printf("%d ",m[ 0 ]);
 
 m[ 10 ]  = 5 / 2 * 3; 
 m[ 44 ]  = 2 + 2; 

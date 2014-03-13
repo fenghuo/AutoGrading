@@ -1,15 +1,26 @@
+Program 
+{
+	var4 : Bool;
+	var5 : Int;
 
-L1:
-m[4] = 15 - (m[4] - 6)
-m[5] = 25 / 12 * 3
-m[6] = 32 + m[42]
-m[7] = 45 - m[54 - 36]
-m[8] = 55 - (14 - 26)
-m[9] = 65 - m[(36 - 24)]
-print m[3]
-goto 1 if m[0]
-print m[12]
-goto 5
-print m[90]
-L2:
-print m[80]
+	start() : Nothing
+	{
+		var1 : Int;
+		var2 : Int;
+		var1 = 512;
+		var5 = 1024;
+		print var5/var1;
+		var5 = end(var1,var,true);	
+		return;
+	};
+
+	end(var1:Int,var2:Int,flag:Bool) : Int
+	{
+		var1 = 512;
+		var5 = 1024;
+		print var5/var1;
+		var2 = var5/var1;
+		if not flag then var2=-12345;	
+		return var2;
+	};
+};

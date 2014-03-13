@@ -17,3 +17,6 @@ printf("%d\n", m[12]);
 printf("%d\n", m[90]);
 L2:
 printf("%d\n", m[80]);
+return 0;
+}
+

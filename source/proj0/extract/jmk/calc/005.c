@@ -13,16 +13,16 @@ m[ 6 ]  = 32 + m[ 42 ];
 m[ 7 ]  = 45 - m[ 54 - 36 ]; 
 m[ 8 ]  = 55 -  ( 14 - 26 ) ; 
 m[ 9 ]  = 65 - m[  ( 36 - 24 )  ]; 
-printf("%f ",m[ 3 ]);
+printf("%d ",m[ 3 ]);
 
  if( m[ 0 ] );
 goto L1; 
-printf("%f ",m[ 12 ]);
+printf("%d ",m[ 12 ]);
 
 goto L5; 
-printf("%f ",m[ 90 ]);
+printf("%d ",m[ 90 ]);
 
 L2:
-printf("%f ",m[ 80 ]);
+printf("%d ",m[ 80 ]);
 
 }

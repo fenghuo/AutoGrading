@@ -1,3 +1,58 @@
+Read line m[0] = 5 / 2 * 3
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 1, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 1, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 1, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 1, i=3
+line[4]=" ", line[i..i+5]=" = 5 /"
+line[5]="=", line[i..i+5]="= 5 / "
+Parsed token = at line 1, i=5
+line[6]=" ", line[i..i+5]=" 5 / 2"
+line[7]="5", line[i..i+5]="5 / 2 "
+i=7, j=8, str=5
+Parsed token num at line 1, i=7
+line[8]=" ", line[i..i+5]=" / 2 *"
+line[9]="/", line[i..i+5]="/ 2 * "
+Parsed token / at line 1, i=9
+line[10]=" ", line[i..i+5]=" 2 * 3"
+line[11]="2", line[i..i+5]="2 * 3"
+i=11, j=12, str=2
+Parsed token num at line 1, i=11
+line[12]=" ", line[i..i+5]=" * 3"
+line[13]="*", line[i..i+5]="* 3"
+Parsed token * at line 1, i=13
+line[14]=" ", line[i..i+5]=" 3"
+line[15]="3", line[i..i+5]="3"
+i=15, j=16, str=3
+Parsed token num at line 1, i=15
+Read line m[4] = 88 + 2
+line[0]="m", line[i..i+5]="m[4] ="
+Parsed token m at line 2, i=0
+line[1]="[", line[i..i+5]="[4] = "
+Parsed token [ at line 2, i=1
+line[2]="4", line[i..i+5]="4] = 8"
+i=2, j=3, str=4
+Parsed token num at line 2, i=2
+line[3]="]", line[i..i+5]="] = 88"
+Parsed token ] at line 2, i=3
+line[4]=" ", line[i..i+5]=" = 88 "
+line[5]="=", line[i..i+5]="= 88 +"
+Parsed token = at line 2, i=5
+line[6]=" ", line[i..i+5]=" 88 + "
+line[7]="8", line[i..i+5]="88 + 2"
+i=7, j=9, str=88
+Parsed token num at line 2, i=8
+line[9]=" ", line[i..i+5]=" + 2"
+line[10]="+", line[i..i+5]="+ 2"
+Parsed token + at line 2, i=10
+line[11]=" ", line[i..i+5]=" 2"
+line[12]="2", line[i..i+5]="2"
+i=12, j=13, str=2
+Parsed token num at line 2, i=12
 digraph G {
 	"Start1" [label="Start"]
 	"Statements2" [label="Statements"]
@@ -6,100 +61,136 @@ digraph G {
 	"Statements2" -> "Statement3"
 	"Assignment4" [label="Assignment"]
 	"Statement3" -> "Assignment4"
-	"Expression5" [label="Expression"]
-	"Assignment4" -> "Expression5"
-	"Term6" [label="Term"]
-	"Expression5" -> "Term6"
-	"Exponential Term7" [label="Exponential Term"]
-	"Term6" -> "Exponential Term7"
-	"Bracket Term8" [label="Bracket Term"]
-	"Exponential Term7" -> "Bracket Term8"
-	"Right of Term9" [label="Right of Term"]
-	"Term6" -> "Right of Term9"
-	"e10" [label="e"]
-	"Right of Term9" -> "e10"
-	"Right of Expression11" [label="Right of Expression"]
-	"Expression5" -> "Right of Expression11"
-	"e12" [label="e"]
-	"Right of Expression11" -> "e12"
-	"Expression13" [label="Expression"]
-	"Assignment4" -> "Expression13"
-	"Term14" [label="Term"]
-	"Expression13" -> "Term14"
-	"Exponential Term15" [label="Exponential Term"]
-	"Term14" -> "Exponential Term15"
-	"Bracket Term16" [label="Bracket Term"]
-	"Exponential Term15" -> "Bracket Term16"
-	"Right of Term17" [label="Right of Term"]
-	"Term14" -> "Right of Term17"
-	"Exponential Term18" [label="Exponential Term"]
-	"Right of Term17" -> "Exponential Term18"
-	"Bracket Term19" [label="Bracket Term"]
-	"Exponential Term18" -> "Bracket Term19"
-	"Right of Term20" [label="Right of Term"]
-	"Right of Term17" -> "Right of Term20"
-	"Exponential Term21" [label="Exponential Term"]
-	"Right of Term20" -> "Exponential Term21"
-	"Bracket Term22" [label="Bracket Term"]
-	"Exponential Term21" -> "Bracket Term22"
+	"m5" [label="m",style=filled,fillcolor=powderblue]
+	"Assignment4" -> "m5"
+	"[6" [label="[",style=filled,fillcolor=powderblue]
+	"Assignment4" -> "[6"
+	"Expression7" [label="Expression"]
+	"Assignment4" -> "Expression7"
+	"Term8" [label="Term"]
+	"Expression7" -> "Term8"
+	"Exponential Term9" [label="Exponential Term"]
+	"Term8" -> "Exponential Term9"
+	"Bracket Term10" [label="Bracket Term"]
+	"Exponential Term9" -> "Bracket Term10"
+	"num11" [label="num",style=filled,fillcolor=powderblue]
+	"Bracket Term10" -> "num11"
+	"Right of Term12" [label="Right of Term"]
+	"Term8" -> "Right of Term12"
+	"e13" [label="e"]
+	"Right of Term12" -> "e13"
+	"Right of Expression14" [label="Right of Expression"]
+	"Expression7" -> "Right of Expression14"
+	"e15" [label="e"]
+	"Right of Expression14" -> "e15"
+	"]16" [label="]",style=filled,fillcolor=powderblue]
+	"Assignment4" -> "]16"
+	"=17" [label="=",style=filled,fillcolor=powderblue]
+	"Assignment4" -> "=17"
+	"Expression18" [label="Expression"]
+	"Assignment4" -> "Expression18"
+	"Term19" [label="Term"]
+	"Expression18" -> "Term19"
+	"Exponential Term20" [label="Exponential Term"]
+	"Term19" -> "Exponential Term20"
+	"Bracket Term21" [label="Bracket Term"]
+	"Exponential Term20" -> "Bracket Term21"
+	"num22" [label="num",style=filled,fillcolor=powderblue]
+	"Bracket Term21" -> "num22"
 	"Right of Term23" [label="Right of Term"]
-	"Right of Term20" -> "Right of Term23"
-	"e24" [label="e"]
-	"Right of Term23" -> "e24"
-	"Right of Expression25" [label="Right of Expression"]
-	"Expression13" -> "Right of Expression25"
-	"e26" [label="e"]
-	"Right of Expression25" -> "e26"
-	"Statements27" [label="Statements"]
-	"Statements2" -> "Statements27"
-	"Statement28" [label="Statement"]
-	"Statements27" -> "Statement28"
-	"Assignment29" [label="Assignment"]
-	"Statement28" -> "Assignment29"
-	"Expression30" [label="Expression"]
-	"Assignment29" -> "Expression30"
-	"Term31" [label="Term"]
-	"Expression30" -> "Term31"
-	"Exponential Term32" [label="Exponential Term"]
-	"Term31" -> "Exponential Term32"
-	"Bracket Term33" [label="Bracket Term"]
-	"Exponential Term32" -> "Bracket Term33"
-	"Right of Term34" [label="Right of Term"]
-	"Term31" -> "Right of Term34"
-	"e35" [label="e"]
-	"Right of Term34" -> "e35"
-	"Right of Expression36" [label="Right of Expression"]
-	"Expression30" -> "Right of Expression36"
-	"e37" [label="e"]
-	"Right of Expression36" -> "e37"
-	"Expression38" [label="Expression"]
-	"Assignment29" -> "Expression38"
-	"Term39" [label="Term"]
-	"Expression38" -> "Term39"
-	"Exponential Term40" [label="Exponential Term"]
-	"Term39" -> "Exponential Term40"
-	"Bracket Term41" [label="Bracket Term"]
-	"Exponential Term40" -> "Bracket Term41"
-	"Right of Term42" [label="Right of Term"]
-	"Term39" -> "Right of Term42"
-	"e43" [label="e"]
-	"Right of Term42" -> "e43"
-	"Right of Expression44" [label="Right of Expression"]
-	"Expression38" -> "Right of Expression44"
-	"Term45" [label="Term"]
-	"Right of Expression44" -> "Term45"
-	"Exponential Term46" [label="Exponential Term"]
-	"Term45" -> "Exponential Term46"
-	"Bracket Term47" [label="Bracket Term"]
-	"Exponential Term46" -> "Bracket Term47"
-	"Right of Term48" [label="Right of Term"]
-	"Term45" -> "Right of Term48"
-	"e49" [label="e"]
-	"Right of Term48" -> "e49"
-	"Right of Expression50" [label="Right of Expression"]
-	"Right of Expression44" -> "Right of Expression50"
-	"e51" [label="e"]
-	"Right of Expression50" -> "e51"
-	"e52" [label="e"]
-	"Statements27" -> "e52"
+	"Term19" -> "Right of Term23"
+	"/24" [label="/",style=filled,fillcolor=powderblue]
+	"Right of Term23" -> "/24"
+	"Exponential Term25" [label="Exponential Term"]
+	"Right of Term23" -> "Exponential Term25"
+	"Bracket Term26" [label="Bracket Term"]
+	"Exponential Term25" -> "Bracket Term26"
+	"num27" [label="num",style=filled,fillcolor=powderblue]
+	"Bracket Term26" -> "num27"
+	"Right of Term28" [label="Right of Term"]
+	"Right of Term23" -> "Right of Term28"
+	"*29" [label="*",style=filled,fillcolor=powderblue]
+	"Right of Term28" -> "*29"
+	"Exponential Term30" [label="Exponential Term"]
+	"Right of Term28" -> "Exponential Term30"
+	"Bracket Term31" [label="Bracket Term"]
+	"Exponential Term30" -> "Bracket Term31"
+	"num32" [label="num",style=filled,fillcolor=powderblue]
+	"Bracket Term31" -> "num32"
+	"Right of Term33" [label="Right of Term"]
+	"Right of Term28" -> "Right of Term33"
+	"e34" [label="e"]
+	"Right of Term33" -> "e34"
+	"Right of Expression35" [label="Right of Expression"]
+	"Expression18" -> "Right of Expression35"
+	"e36" [label="e"]
+	"Right of Expression35" -> "e36"
+	"Statements37" [label="Statements"]
+	"Statements2" -> "Statements37"
+	"Statement38" [label="Statement"]
+	"Statements37" -> "Statement38"
+	"Assignment39" [label="Assignment"]
+	"Statement38" -> "Assignment39"
+	"m40" [label="m",style=filled,fillcolor=powderblue]
+	"Assignment39" -> "m40"
+	"[41" [label="[",style=filled,fillcolor=powderblue]
+	"Assignment39" -> "[41"
+	"Expression42" [label="Expression"]
+	"Assignment39" -> "Expression42"
+	"Term43" [label="Term"]
+	"Expression42" -> "Term43"
+	"Exponential Term44" [label="Exponential Term"]
+	"Term43" -> "Exponential Term44"
+	"Bracket Term45" [label="Bracket Term"]
+	"Exponential Term44" -> "Bracket Term45"
+	"num46" [label="num",style=filled,fillcolor=powderblue]
+	"Bracket Term45" -> "num46"
+	"Right of Term47" [label="Right of Term"]
+	"Term43" -> "Right of Term47"
+	"e48" [label="e"]
+	"Right of Term47" -> "e48"
+	"Right of Expression49" [label="Right of Expression"]
+	"Expression42" -> "Right of Expression49"
+	"e50" [label="e"]
+	"Right of Expression49" -> "e50"
+	"]51" [label="]",style=filled,fillcolor=powderblue]
+	"Assignment39" -> "]51"
+	"=52" [label="=",style=filled,fillcolor=powderblue]
+	"Assignment39" -> "=52"
+	"Expression53" [label="Expression"]
+	"Assignment39" -> "Expression53"
+	"Term54" [label="Term"]
+	"Expression53" -> "Term54"
+	"Exponential Term55" [label="Exponential Term"]
+	"Term54" -> "Exponential Term55"
+	"Bracket Term56" [label="Bracket Term"]
+	"Exponential Term55" -> "Bracket Term56"
+	"num57" [label="num",style=filled,fillcolor=powderblue]
+	"Bracket Term56" -> "num57"
+	"Right of Term58" [label="Right of Term"]
+	"Term54" -> "Right of Term58"
+	"e59" [label="e"]
+	"Right of Term58" -> "e59"
+	"Right of Expression60" [label="Right of Expression"]
+	"Expression53" -> "Right of Expression60"
+	"+61" [label="+",style=filled,fillcolor=powderblue]
+	"Right of Expression60" -> "+61"
+	"Term62" [label="Term"]
+	"Right of Expression60" -> "Term62"
+	"Exponential Term63" [label="Exponential Term"]
+	"Term62" -> "Exponential Term63"
+	"Bracket Term64" [label="Bracket Term"]
+	"Exponential Term63" -> "Bracket Term64"
+	"num65" [label="num",style=filled,fillcolor=powderblue]
+	"Bracket Term64" -> "num65"
+	"Right of Term66" [label="Right of Term"]
+	"Term62" -> "Right of Term66"
+	"e67" [label="e"]
+	"Right of Term66" -> "e67"
+	"Right of Expression68" [label="Right of Expression"]
+	"Right of Expression60" -> "Right of Expression68"
+	"e69" [label="e"]
+	"Right of Expression68" -> "e69"
+	"e70" [label="e"]
+	"Statements37" -> "e70"
 };

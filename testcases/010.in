@@ -1,26 +1,113 @@
-m[0] = 5 / 2 * 3
-m[4] = 88 + 2
-m[0] = 5 - (m[4] - 6)
-m[0] = 5 / 2 * 3
-m[0] = 2 + m[2]
-m[0] = 5 - m[4**3*1-2] - 6
-L1:
-m[0] = 5 - (m[4] - 6)
-m[0] = 5 / 2 * 3
-m[0] = 2 + m[2]
-m[0] = 5 - m[4 - 6]
-m[3] = 5 - (4 - 6)
-m[2] = 5 - m[("6 - 4)]
-print m[3]
-goto 1 if m[60]
-print m[2]
-goto 2
-print m[0]
-L2:
-print m[0]
-m[0] = 5 / 2 * 3
-m[4] = 2 + 2
-m[0] = 5 - (m[4] - 6)
-m[0] = 5 / 2 * 3
-m[0] = 2 + m[2]
-m[0] = 5 - m[4 - 6]
+Fruit
+{
+	time, weight : Int;
+	value : Int;
+	mature : Bool;
+
+	seed() : Nothing
+	{
+		time=0;
+		weight=0;
+		value=0;
+		mature= false;
+		return;
+	};
+
+	grow(count : Int) : Nothing
+	{
+		/*  this a comment */
+		add : Int;
+		temp : Int;
+		if not mature then add=10-time;
+		time=time+1;
+		weight=weight+add;
+		if not time <= 10 then mature = true;
+		if not count < 0 then temp = grow(count-1);
+		return;
+	};
+
+	sell(pay : Int, rtime : Int,rweight : Int) : Int
+	{
+		toSell : Int;
+		toSell=pay;
+		if not mature then toSell=toSell-10;
+		if not rtime < rtime then toSell=toSell-20;
+		if weight < rweight then toSell=toSell-rweight+weight;
+		if toSell < 0 then toSell=0;
+		return toSell;
+	};/*
+
+	this a / ** / 
+
+*/
+};
+
+Apple from Fruit
+{
+	appleJuice(water : Int, sugar : Int, quality : Int) : Int
+	{
+		juice : Int;
+		if water < 0 then water = 0;
+		if sugar < 1 then sugar = 1;
+		if water/sugar < quality then water=sugar*quality;
+		juice = water + weight + sugar;
+		return juice;
+	};
+};
+
+Orange from Fruit
+{
+	organeJuice(water : Int, sugar : Int, quality : Int) : Int
+	{
+		juice : Int;
+		if water < 2 then water = 2;
+		if sugar < 1 then sugar = 1;
+		if water/sugar < quality then water=sugar*quality;
+		juice = water + weight + sugar;
+		return juice;
+	};
+};
+
+RedApple from Apple
+{
+	redAppleJuice(water : Int, sugar : Int, quality : Int) : Int
+	{
+		juice : Int;
+		oneMore : Apple;
+		temp : Int;
+		temp = oneMore.seed();
+		temp = oneMore.grow(20);
+		if water < 2 then water = 2;
+		if sugar < 10 then sugar = 1;
+		if water/sugar < quality then water=sugar*quality;
+		juice = water + weight + sugar;
+		juice = juice + oneMore.appleJuice(1,1,2);
+		return juice;
+	};
+};
+
+Program 
+{
+	start() : Nothing
+	{	
+		apple : Apple;
+		redApple : RedApple;
+		temp : Int;
+		temp = apple.seed();
+		temp = apple.grow(10);
+		temp = redApple.seed();
+		temp = redApple.grow(15);
+
+
+		print apple.sell(10,8,15);
+		print apple.appleJuice(1,1,1);
+		print redApple.sell(8,10,12);
+		print redApple.redAppleJuice(0,1,2);
+		return;
+	};
+};
+/*
+
+this a comment;
+
+*/

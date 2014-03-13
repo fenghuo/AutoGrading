@@ -723,6 +723,7 @@ void parser_t::Jump_(std::string label_name)
 			exp = Expression();
 			fprintf(stderr, "\tif (%s) goto label%s;", exp.c_str(), label_name.c_str());
 			break;
+		case T_m:
 		case T_label:
 		case T_goto:
 		case T_equals:

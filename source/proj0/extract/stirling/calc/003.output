@@ -1,1 +1,78 @@
+Read line m[60] = m[60] - 1
+line[0]="m", line[i..i+5]="m[60] "
+Parsed token m at line 1, i=0
+line[1]="[", line[i..i+5]="[60] ="
+Parsed token [ at line 1, i=1
+line[2]="6", line[i..i+5]="60] = "
+i=2, j=4, str=60
+Parsed token num at line 1, i=3
+line[4]="]", line[i..i+5]="] = m["
+Parsed token ] at line 1, i=4
+line[5]=" ", line[i..i+5]=" = m[6"
+line[6]="=", line[i..i+5]="= m[60"
+Parsed token = at line 1, i=6
+line[7]=" ", line[i..i+5]=" m[60]"
+line[8]="m", line[i..i+5]="m[60] "
+Parsed token m at line 1, i=8
+line[9]="[", line[i..i+5]="[60] -"
+Parsed token [ at line 1, i=9
+line[10]="6", line[i..i+5]="60] - "
+i=10, j=12, str=60
+Parsed token num at line 1, i=11
+line[12]="]", line[i..i+5]="] - 1"
+Parsed token ] at line 1, i=12
+line[13]=" ", line[i..i+5]=" - 1"
+line[14]="-", line[i..i+5]="- 1"
+Parsed token - at line 1, i=14
+line[15]=" ", line[i..i+5]=" 1"
+line[16]="1", line[i..i+5]="1"
+i=16, j=17, str=1
+Parsed token num at line 1, i=16
+Read line m[0] = 5 / 2 * 3
+line[0]="m", line[i..i+5]="m[0] ="
+Parsed token m at line 2, i=0
+line[1]="[", line[i..i+5]="[0] = "
+Parsed token [ at line 2, i=1
+line[2]="0", line[i..i+5]="0] = 5"
+i=2, j=3, str=0
+Parsed token num at line 2, i=2
+line[3]="]", line[i..i+5]="] = 5 "
+Parsed token ] at line 2, i=3
+line[4]=" ", line[i..i+5]=" = 5 /"
+line[5]="=", line[i..i+5]="= 5 / "
+Parsed token = at line 2, i=5
+line[6]=" ", line[i..i+5]=" 5 / 2"
+line[7]="5", line[i..i+5]="5 / 2 "
+i=7, j=8, str=5
+Parsed token num at line 2, i=7
+line[8]=" ", line[i..i+5]=" / 2 *"
+line[9]="/", line[i..i+5]="/ 2 * "
+Parsed token / at line 2, i=9
+line[10]=" ", line[i..i+5]=" 2 * 3"
+line[11]="2", line[i..i+5]="2 * 3"
+i=11, j=12, str=2
+Parsed token num at line 2, i=11
+line[12]=" ", line[i..i+5]=" * 3"
+line[13]="*", line[i..i+5]="* 3"
+Parsed token * at line 2, i=13
+line[14]=" ", line[i..i+5]=" 3"
+line[15]="3", line[i..i+5]="3"
+i=15, j=16, str=3
+Parsed token num at line 2, i=15
+Read line m[4] = 9999999999999992 + 2
+line[0]="m", line[i..i+5]="m[4] ="
+Parsed token m at line 3, i=0
+line[1]="[", line[i..i+5]="[4] = "
+Parsed token [ at line 3, i=1
+line[2]="4", line[i..i+5]="4] = 9"
+i=2, j=3, str=4
+Parsed token num at line 3, i=2
+line[3]="]", line[i..i+5]="] = 99"
+Parsed token ] at line 3, i=3
+line[4]=" ", line[i..i+5]=" = 999"
+line[5]="=", line[i..i+5]="= 9999"
+Parsed token = at line 3, i=5
+line[6]=" ", line[i..i+5]=" 99999"
+line[7]="9", line[i..i+5]="999999"
+i=7, j=23, str=9999999999999992
 range error: number 9999999999999992 not within 0 and 4294967295 - line 1

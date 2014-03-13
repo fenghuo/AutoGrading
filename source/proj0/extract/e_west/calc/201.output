@@ -382,8 +382,8 @@ digraph G {
 	"Exponent190" -> "**191"
 	"Base192" [label="Base"]
 	"Exponent190" -> "Base192"
-	"e193" [label="e"]
-	"Base192" -> "e193"
+	"num193" [label="num",style=filled,fillcolor=powderblue]
+	"Base192" -> "num193"
 	"Exponent194" [label="Exponent"]
 	"Exponent190" -> "Exponent194"
 	"e195" [label="e"]
@@ -404,92 +404,78 @@ digraph G {
 	"Exponent201" -> "e202"
 	"T_prime203" [label="T_prime"]
 	"T_prime196" -> "T_prime203"
-	"*204" [label="*",style=filled,fillcolor=powderblue]
-	"T_prime203" -> "*204"
-	"Factor205" [label="Factor"]
-	"T_prime203" -> "Factor205"
-	"Base206" [label="Base"]
-	"Factor205" -> "Base206"
-	"num207" [label="num",style=filled,fillcolor=powderblue]
-	"Base206" -> "num207"
-	"Exponent208" [label="Exponent"]
-	"Factor205" -> "Exponent208"
-	"e209" [label="e"]
-	"Exponent208" -> "e209"
-	"T_prime210" [label="T_prime"]
-	"T_prime203" -> "T_prime210"
-	"e211" [label="e"]
-	"T_prime210" -> "e211"
-	"E_prime212" [label="E_prime"]
-	"Expression185" -> "E_prime212"
-	"-213" [label="-",style=filled,fillcolor=powderblue]
-	"E_prime212" -> "-213"
-	"Term214" [label="Term"]
-	"E_prime212" -> "Term214"
-	"Factor215" [label="Factor"]
-	"Term214" -> "Factor215"
-	"Base216" [label="Base"]
-	"Factor215" -> "Base216"
-	"num217" [label="num",style=filled,fillcolor=powderblue]
-	"Base216" -> "num217"
+	"e204" [label="e"]
+	"T_prime203" -> "e204"
+	"E_prime205" [label="E_prime"]
+	"Expression185" -> "E_prime205"
+	"-206" [label="-",style=filled,fillcolor=powderblue]
+	"E_prime205" -> "-206"
+	"Term207" [label="Term"]
+	"E_prime205" -> "Term207"
+	"Factor208" [label="Factor"]
+	"Term207" -> "Factor208"
+	"Base209" [label="Base"]
+	"Factor208" -> "Base209"
+	"num210" [label="num",style=filled,fillcolor=powderblue]
+	"Base209" -> "num210"
+	"Exponent211" [label="Exponent"]
+	"Factor208" -> "Exponent211"
+	"e212" [label="e"]
+	"Exponent211" -> "e212"
+	"T_prime213" [label="T_prime"]
+	"Term207" -> "T_prime213"
+	"e214" [label="e"]
+	"T_prime213" -> "e214"
+	"E_prime215" [label="E_prime"]
+	"E_prime205" -> "E_prime215"
+	"e216" [label="e"]
+	"E_prime215" -> "e216"
+	"]217" [label="]",style=filled,fillcolor=powderblue]
+	"Base182" -> "]217"
 	"Exponent218" [label="Exponent"]
-	"Factor215" -> "Exponent218"
+	"Factor181" -> "Exponent218"
 	"e219" [label="e"]
 	"Exponent218" -> "e219"
 	"T_prime220" [label="T_prime"]
-	"Term214" -> "T_prime220"
+	"Term180" -> "T_prime220"
 	"e221" [label="e"]
 	"T_prime220" -> "e221"
 	"E_prime222" [label="E_prime"]
-	"E_prime212" -> "E_prime222"
-	"e223" [label="e"]
-	"E_prime222" -> "e223"
-	"]224" [label="]",style=filled,fillcolor=powderblue]
-	"Base182" -> "]224"
-	"Exponent225" [label="Exponent"]
-	"Factor181" -> "Exponent225"
-	"e226" [label="e"]
-	"Exponent225" -> "e226"
-	"T_prime227" [label="T_prime"]
-	"Term180" -> "T_prime227"
-	"e228" [label="e"]
-	"T_prime227" -> "e228"
-	"E_prime229" [label="E_prime"]
-	"E_prime178" -> "E_prime229"
-	"-230" [label="-",style=filled,fillcolor=powderblue]
-	"E_prime229" -> "-230"
-	"Term231" [label="Term"]
-	"E_prime229" -> "Term231"
-	"Factor232" [label="Factor"]
-	"Term231" -> "Factor232"
-	"Base233" [label="Base"]
-	"Factor232" -> "Base233"
-	"num234" [label="num",style=filled,fillcolor=powderblue]
-	"Base233" -> "num234"
-	"Exponent235" [label="Exponent"]
-	"Factor232" -> "Exponent235"
-	"e236" [label="e"]
-	"Exponent235" -> "e236"
-	"T_prime237" [label="T_prime"]
-	"Term231" -> "T_prime237"
-	"e238" [label="e"]
-	"T_prime237" -> "e238"
-	"E_prime239" [label="E_prime"]
-	"E_prime229" -> "E_prime239"
-	"e240" [label="e"]
-	"E_prime239" -> "e240"
-	"S_prime241" [label="S_prime"]
-	"Statements151" -> "S_prime241"
-	"Statements242" [label="Statements"]
-	"S_prime241" -> "Statements242"
-	"Statement243" [label="Statement"]
-	"Statements242" -> "Statement243"
-	"Label244" [label="Label"]
-	"Statement243" -> "Label244"
-	"L245" [label="L",style=filled,fillcolor=powderblue]
-	"Label244" -> "L245"
-	"num246" [label="num",style=filled,fillcolor=powderblue]
-	"Label244" -> "num246"
-	":247" [label=":",style=filled,fillcolor=powderblue]
-	"Label244" -> ":247"
+	"E_prime178" -> "E_prime222"
+	"-223" [label="-",style=filled,fillcolor=powderblue]
+	"E_prime222" -> "-223"
+	"Term224" [label="Term"]
+	"E_prime222" -> "Term224"
+	"Factor225" [label="Factor"]
+	"Term224" -> "Factor225"
+	"Base226" [label="Base"]
+	"Factor225" -> "Base226"
+	"num227" [label="num",style=filled,fillcolor=powderblue]
+	"Base226" -> "num227"
+	"Exponent228" [label="Exponent"]
+	"Factor225" -> "Exponent228"
+	"e229" [label="e"]
+	"Exponent228" -> "e229"
+	"T_prime230" [label="T_prime"]
+	"Term224" -> "T_prime230"
+	"e231" [label="e"]
+	"T_prime230" -> "e231"
+	"E_prime232" [label="E_prime"]
+	"E_prime222" -> "E_prime232"
+	"e233" [label="e"]
+	"E_prime232" -> "e233"
+	"S_prime234" [label="S_prime"]
+	"Statements151" -> "S_prime234"
+	"Statements235" [label="Statements"]
+	"S_prime234" -> "Statements235"
+	"Statement236" [label="Statement"]
+	"Statements235" -> "Statement236"
+	"Label237" [label="Label"]
+	"Statement236" -> "Label237"
+	"L238" [label="L",style=filled,fillcolor=powderblue]
+	"Label237" -> "L238"
+	"num239" [label="num",style=filled,fillcolor=powderblue]
+	"Label237" -> "num239"
+	":240" [label=":",style=filled,fillcolor=powderblue]
+	"Label237" -> ":240"
 syntax error: found m expecting : - line 7

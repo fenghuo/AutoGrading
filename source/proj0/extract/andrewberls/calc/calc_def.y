@@ -37,7 +37,8 @@ Expression    : Term EAddSub
 
 EAddSub       : '+' Term EAddSub
               : '-' Term EAddSub
-              | ;
+              |
+              ;
 
 
 Term          : Factor TMultDiv
@@ -46,7 +47,8 @@ Term          : Factor TMultDiv
 
 TMultDiv      : '*' Factor TMultDiv
               | '/' Factor TMultDiv
-              | ;
+              |
+              ;
 
 MemAccess     : 'm' '[' Expression ']'
               ;
@@ -60,7 +62,8 @@ NumParen      : '(' Expression ')'
               ;
 
 Exponen       : 'e' NumParen Exponen
-              | ;
+              |
+              ;
 
 %%
 
